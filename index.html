@@ -1343,5 +1343,215 @@
       document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
     });
   </script>
+<!-- === BẮT ĐẦU ĐOẠN CODE CHI TIẾT MÓN ĂN & ĐỊA ĐIỂM === -->
+<style>
+  #py-detail-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 35, 44, 0.72);
+    backdrop-filter: blur(5px);
+    z-index: 99999;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    animation: pyFadeIn 0.25s ease;
+  }
+  #py-detail-overlay.active {
+    display: flex;
+  }
+  .py-detail-box {
+    background: #FAF7F2;
+    color: #1E293B;
+    max-width: 620px;
+    width: 100%;
+    max-height: 88vh;
+    overflow-y: auto;
+    border-radius: 20px;
+    padding: 28px;
+    position: relative;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(10, 61, 76, 0.12);
+    font-family: 'Be Vietnam Pro', sans-serif;
+  }
+  .py-close-btn {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background: #E2E8F0;
+    color: #0A3D4C;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .py-close-btn:hover {
+    background: #D47538;
+    color: #fff;
+  }
+  .py-tag {
+    display: inline-block;
+    background: #0A3D4C;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 10px;
+  }
+  .py-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #0A3D4C;
+    margin: 0 0 12px 0;
+  }
+  .py-desc {
+    font-size: 15px;
+    line-height: 1.65;
+    color: #334155;
+    margin-bottom: 20px;
+  }
+  .py-info-card {
+    background: #FFFFFF;
+    border-left: 4px solid #D47538;
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+  .py-info-card h4 {
+    margin: 0 0 6px 0;
+    font-size: 15px;
+    font-weight: 700;
+    color: #D47538;
+  }
+  .py-info-card p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #334155;
+  }
+  @keyframes pyFadeIn {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
+  }
+</style>
+
+<div id="py-detail-overlay" onclick="if(event.target===this) closePyDetailModal()">
+  <div class="py-detail-box">
+    <button class="py-close-btn" onclick="closePyDetailModal()" title="Đóng">×</button>
+    <span class="py-tag" id="py-modal-region"></span>
+    <h3 class="py-title" id="py-modal-title"></h3>
+    <p class="py-desc" id="py-modal-desc"></p>
+
+    <div class="py-info-card">
+      <h4>⏰ Thời điểm lý tưởng để thưởng thức</h4>
+      <p id="py-modal-time"></p>
+    </div>
+
+    <div class="py-info-card" style="border-left-color: #0A3D4C;">
+      <h4 style="color: #0A3D4C;">📍 Địa điểm hấp dẫn & Quán ngon gợi ý</h4>
+      <p id="py-modal-place"></p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // DỮ LIỆU CHI TIẾT 5 MÓN (Bạn có thể sửa chữ trong dấu ngoặc kép "" tùy ý)
+  const PY_DISH_DETAILS = {
+    // --- MÓN 1 ---
+    "Mắt cá ngừ đại dương": {
+      region: "TP. Tuy Hòa • Hải sản đại dương",
+      title: "Mắt cá ngừ đại dương",
+      desc: "Món ăn trứ danh của thủ phủ cá ngừ Tuy Hòa. Mắt cá ngừ to bằng nắm tay được sơ chế kỹ, hầm cách thủy trong thố đất nhỏ cùng thuốc bắc (kỷ tử, táo tàu), sả, ớt hiểm và tiêu xanh. Khi dọn ra vẫn sôi sùng sục, ăn kèm rau tía tô, cải xanh thái sợi và bánh tráng nướng giòn.",
+      time: "Buổi tối hoặc những ngày trời se lạnh, mưa nhẹ (17h00 – 22h00). Thố mắt cá nóng hổi, cay nồng vị tiêu ớt cực kỳ ấm bụng sau một ngày dạo biển.",
+      place: "• Quán ngon: Quán Bà Tám (289 Lê Duẩn, TP. Tuy Hòa) hoặc Quán Sơn Cầu Gỗ (Bờ kè Bạch Đằng).\n• Điểm tham quan gần đó: Tháp Nghinh Phong (ngắm hoàng hôn), Quảng trường 1/4 và Chợ đêm Tuy Hòa."
+    },
+    // --- MÓN 2 ---
+    "Bò một nắng muối kiến vàng": {
+      region: "Huyện Sơn Hòa • Đặc sản núi rừng",
+      title: "Bò một nắng muối kiến vàng",
+      desc: "Thịt thăn bò tơ chăn thả tự nhiên trên vùng đồi núi Sơn Hòa, tẩm ướp gia vị rồi phơi đúng một nắng gắt miền Trung cho se mặt ngoài nhưng bên trong vẫn giữ độ ngọt mềm. Nướng trên than hồng, xé thớ chấm cùng muối kiến vàng chua thanh tự nhiên cực kỳ cuốn hút.",
+      time: "Bữa chiều tối tụ tập bạn bè hoặc mua làm quà biếu (quanh năm, ngon nhất mùa nắng từ tháng 1 – tháng 8).",
+      place: "• Quán ngon & Mua sắm: Các quán đặc sản thị trấn Củng Sơn (Sơn Hòa) hoặc cửa hàng đặc sản đường Lê Lợi, Trần Hưng Đạo (TP. Tuy Hòa).\n• Điểm tham quan gần đó: Cao nguyên Vân Hòa (Đà Lạt thu nhỏ của Phú Yên) và Đập Đồng Cam."
+    },
+    // --- MÓN 3 ---
+    "Sò huyết đầm Ô Loan": {
+      region: "Đầm Ô Loan • Tuy An",
+      title: "Sò huyết đầm Ô Loan",
+      desc: "Nhờ nguồn nước lợ giao hòa giữa sông và biển, sò huyết đầm Ô Loan có kích thước to, thịt dày đỏ au, vị ngọt đậm và béo ngậy vượt trội. Ngon nhất là sò huyết nướng mọi vừa chín tới, rang me hoặc xào tỏi, ăn kèm rau răm và muối tiêu chanh.",
+      time: "Buổi chiều tà ngắm hoàng hôn trên đầm (15h30 – 18h30), đặc biệt từ tháng 3 đến tháng 8 khi biển êm và sò béo mập nhất năm.",
+      place: "• Quán ngon: Các nhà hàng bè nổi dọc cầu An Hải hoặc ven đầm Ô Loan (xã An Hải, huyện Tuy An).\n• Điểm tham quan gần đó: Gành Đá Đĩa, Hòn Yến (ngắm san hô khi thủy triều rút) và Nhà thờ Mằng Lăng."
+    },
+    // --- MÓN 4 ---
+    "Bánh canh hẹ": {
+      region: "TP. Tuy Hòa • Ẩm thực dân dã",
+      title: "Bánh canh hẹ Phú Yên",
+      desc: "Điểm tâm quốc dân của người Xứ Nẫu với sợi bánh canh bột gạo mềm dai, nước dùng ninh từ cá biển ngọt thanh, chả cá chiên vàng ươm, trứng cút và phủ kín bên trên là lớp lá hẹ xanh mướt thái nhuyễn thơm nồng.",
+      time: "Bữa sáng sớm (6h00 – 9h30) để nạp năng lượng dạo phố hoặc bữa xế chiều (15h00 – 19h00) nhẹ bụng mà vẫn đậm đà.",
+      place: "• Quán ngon: Bánh canh hẹ Thành Tâm (53 Điện Biên Phủ) hoặc khu vực Bưu điện tỉnh (đường Trần Hưng Đạo, TP. Tuy Hòa).\n• Điểm tham quan gần đó: Tháp Nhạn (ngắm toàn cảnh thành phố và sông Đà Rằng), Bãi biển Tuy Hòa."
+    },
+    // --- MÓN 5 ---
+    "Chả dông": {
+      region: "TP. Tuy Hòa • Mỹ vị vùng cát",
+      title: "Chả dông Phú Yên",
+      desc: "Dông cát sống ở các đồi cát ven biển có thịt trắng, săn chắc và ngọt thanh. Thịt dông được băm nhuyễn cùng nấm mèo, miến dong, hành tím và tiêu, cuốn bánh tráng mỏng chiên giòn rụm, ăn kèm rau sống, xoài xanh và mắm nêm.",
+      time: "Bữa trưa hoặc chiều muộn (11h00 – 19h00), lý tưởng nhất vào mùa hè (tháng 4 – tháng 9) khi dông cát vào mùa béo nhất.",
+      place: "• Quán ngon: Chả dông 92 Nguyễn Công Trứ hoặc các quán đặc sản dọc đường Trần Bình Trọng (TP. Tuy Hòa).\n• Điểm tham quan gần đó: Bãi Xép (phim trường Hoa vàng trên cỏ xanh) và Mũi Điện (Bãi Môn)."
+    }
+  };
+
+  function openPyDetailModal(data) {
+    document.getElementById('py-modal-region').innerText = data.region;
+    document.getElementById('py-modal-title').innerText = data.title;
+    document.getElementById('py-modal-desc').innerText = data.desc;
+    document.getElementById('py-modal-time').innerText = data.time;
+    document.getElementById('py-modal-place').innerHTML = data.place.replace(/\n/g, '<br>');
+    document.getElementById('py-detail-overlay').classList.add('active');
+  }
+
+  function closePyDetailModal() {
+    document.getElementById('py-detail-overlay').classList.remove('active');
+  }
+
+  // Bấm phím ESC để đóng bảng chi tiết
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closePyDetailModal();
+  });
+
+  // Tự động nhận diện khi bấm vào thẻ của 1 trong 5 món ăn
+  document.addEventListener('click', function(e) {
+    const btn = e.target.closest('button');
+    if (btn && (btn.innerText.includes('Lưu') || btn.innerText.includes('Save') || btn.innerText.includes('Đã lưu'))) {
+      return; // Giữ nguyên chức năng nút Lưu lịch trình
+    }
+
+    let el = e.target;
+    let matchedKey = null;
+    const keys = Object.keys(PY_DISH_DETAILS);
+
+    while (el && el !== document.body) {
+      const text = el.innerText || '';
+      const found = keys.filter(k => text.includes(k));
+      if (found.length === 1 && el.querySelector('img')) {
+        matchedKey = found[0];
+        break;
+      }
+      el = el.parentElement;
+    }
+
+    if (matchedKey) {
+      e.preventDefault();
+      e.stopPropagation();
+      openPyDetailModal(PY_DISH_DETAILS[matchedKey]);
+    }
+  }, true);
+</script>
+<!-- === KẾT THÚC ĐOẠN CODE CHI TIẾT === -->
 </body>
 </html>
