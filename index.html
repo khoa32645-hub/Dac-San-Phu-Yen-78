@@ -1461,104 +1461,12 @@
   </div>
 </div>
 
-<script>
-  // DỮ LIỆU CHI TIẾT 5 MÓN (Bạn có thể sửa chữ trong dấu ngoặc kép "" tùy ý)
-  const PY_DISH_DETAILS = {
-    // --- MÓN 1 ---
-    "Mắt cá ngừ đại dương": {
-      region: "TP. Tuy Hòa • Hải sản đại dương",
-      title: "Mắt cá ngừ đại dương",
-      desc: "Món ăn trứ danh của thủ phủ cá ngừ Tuy Hòa. Mắt cá ngừ to bằng nắm tay được sơ chế kỹ, hầm cách thủy trong thố đất nhỏ cùng thuốc bắc (kỷ tử, táo tàu), sả, ớt hiểm và tiêu xanh. Khi dọn ra vẫn sôi sùng sục, ăn kèm rau tía tô, cải xanh thái sợi và bánh tráng nướng giòn.",
-      time: "Buổi tối hoặc những ngày trời se lạnh, mưa nhẹ (17h00 – 22h00). Thố mắt cá nóng hổi, cay nồng vị tiêu ớt cực kỳ ấm bụng sau một ngày dạo biển.",
-      place: "• Quán ngon: Quán Bà Tám (289 Lê Duẩn, TP. Tuy Hòa) hoặc Quán Sơn Cầu Gỗ (Bờ kè Bạch Đằng).\n• Điểm tham quan gần đó: Tháp Nghinh Phong (ngắm hoàng hôn), Quảng trường 1/4 và Chợ đêm Tuy Hòa."
-    },
-    // --- MÓN 2 ---
-    "Bò một nắng muối kiến vàng": {
-      region: "Huyện Sơn Hòa • Đặc sản núi rừng",
-      title: "Bò một nắng muối kiến vàng",
-      desc: "Thịt thăn bò tơ chăn thả tự nhiên trên vùng đồi núi Sơn Hòa, tẩm ướp gia vị rồi phơi đúng một nắng gắt miền Trung cho se mặt ngoài nhưng bên trong vẫn giữ độ ngọt mềm. Nướng trên than hồng, xé thớ chấm cùng muối kiến vàng chua thanh tự nhiên cực kỳ cuốn hút.",
-      time: "Bữa chiều tối tụ tập bạn bè hoặc mua làm quà biếu (quanh năm, ngon nhất mùa nắng từ tháng 1 – tháng 8).",
-      place: "• Quán ngon & Mua sắm: Các quán đặc sản thị trấn Củng Sơn (Sơn Hòa) hoặc cửa hàng đặc sản đường Lê Lợi, Trần Hưng Đạo (TP. Tuy Hòa).\n• Điểm tham quan gần đó: Cao nguyên Vân Hòa (Đà Lạt thu nhỏ của Phú Yên) và Đập Đồng Cam."
-    },
-    // --- MÓN 3 ---
-    "Sò huyết đầm Ô Loan": {
-      region: "Đầm Ô Loan • Tuy An",
-      title: "Sò huyết đầm Ô Loan",
-      desc: "Nhờ nguồn nước lợ giao hòa giữa sông và biển, sò huyết đầm Ô Loan có kích thước to, thịt dày đỏ au, vị ngọt đậm và béo ngậy vượt trội. Ngon nhất là sò huyết nướng mọi vừa chín tới, rang me hoặc xào tỏi, ăn kèm rau răm và muối tiêu chanh.",
-      time: "Buổi chiều tà ngắm hoàng hôn trên đầm (15h30 – 18h30), đặc biệt từ tháng 3 đến tháng 8 khi biển êm và sò béo mập nhất năm.",
-      place: "• Quán ngon: Các nhà hàng bè nổi dọc cầu An Hải hoặc ven đầm Ô Loan (xã An Hải, huyện Tuy An).\n• Điểm tham quan gần đó: Gành Đá Đĩa, Hòn Yến (ngắm san hô khi thủy triều rút) và Nhà thờ Mằng Lăng."
-    },
-    // --- MÓN 4 ---
-    "Bánh canh hẹ": {
-      region: "TP. Tuy Hòa • Ẩm thực dân dã",
-      title: "Bánh canh hẹ Phú Yên",
-      desc: "Điểm tâm quốc dân của người Xứ Nẫu với sợi bánh canh bột gạo mềm dai, nước dùng ninh từ cá biển ngọt thanh, chả cá chiên vàng ươm, trứng cút và phủ kín bên trên là lớp lá hẹ xanh mướt thái nhuyễn thơm nồng.",
-      time: "Bữa sáng sớm (6h00 – 9h30) để nạp năng lượng dạo phố hoặc bữa xế chiều (15h00 – 19h00) nhẹ bụng mà vẫn đậm đà.",
-      place: "• Quán ngon: Bánh canh hẹ Thành Tâm (53 Điện Biên Phủ) hoặc khu vực Bưu điện tỉnh (đường Trần Hưng Đạo, TP. Tuy Hòa).\n• Điểm tham quan gần đó: Tháp Nhạn (ngắm toàn cảnh thành phố và sông Đà Rằng), Bãi biển Tuy Hòa."
-    },
-    // --- MÓN 5 ---
-    "Chả dông": {
-      region: "TP. Tuy Hòa • Mỹ vị vùng cát",
-      title: "Chả dông Phú Yên",
-      desc: "Dông cát sống ở các đồi cát ven biển có thịt trắng, săn chắc và ngọt thanh. Thịt dông được băm nhuyễn cùng nấm mèo, miến dong, hành tím và tiêu, cuốn bánh tráng mỏng chiên giòn rụm, ăn kèm rau sống, xoài xanh và mắm nêm.",
-      time: "Bữa trưa hoặc chiều muộn (11h00 – 19h00), lý tưởng nhất vào mùa hè (tháng 4 – tháng 9) khi dông cát vào mùa béo nhất.",
-      place: "• Quán ngon: Chả dông 92 Nguyễn Công Trứ hoặc các quán đặc sản dọc đường Trần Bình Trọng (TP. Tuy Hòa).\n• Điểm tham quan gần đó: Bãi Xép (phim trường Hoa vàng trên cỏ xanh) và Mũi Điện (Bãi Môn)."
-    }
-  };
-
-  function openPyDetailModal(data) {
-    document.getElementById('py-modal-region').innerText = data.region;
-    document.getElementById('py-modal-title').innerText = data.title;
-    document.getElementById('py-modal-desc').innerText = data.desc;
-    document.getElementById('py-modal-time').innerText = data.time;
-    document.getElementById('py-modal-place').innerHTML = data.place.replace(/\n/g, '<br>');
-    document.getElementById('py-detail-overlay').classList.add('active');
-  }
-
-  function closePyDetailModal() {
-    document.getElementById('py-detail-overlay').classList.remove('active');
-  }
-
-  // Bấm phím ESC để đóng bảng chi tiết
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closePyDetailModal();
-  });
-
-  // Tự động nhận diện khi bấm vào thẻ của 1 trong 5 món ăn
-  document.addEventListener('click', function(e) {
-    const btn = e.target.closest('button');
-    if (btn && (btn.innerText.includes('Lưu') || btn.innerText.includes('Save') || btn.innerText.includes('Đã lưu'))) {
-      return; // Giữ nguyên chức năng nút Lưu lịch trình
-    }
-
-    let el = e.target;
-    let matchedKey = null;
-    const keys = Object.keys(PY_DISH_DETAILS);
-
-    while (el && el !== document.body) {
-      const text = el.innerText || '';
-      const found = keys.filter(k => text.includes(k));
-      if (found.length === 1 && el.querySelector('img')) {
-        matchedKey = found[0];
-        break;
-      }
-      el = el.parentElement;
-    }
-
-    if (matchedKey) {
-      e.preventDefault();
-      e.stopPropagation();
-      openPyDetailModal(PY_DISH_DETAILS[matchedKey]);
-    }
-  }, true);
-</script>
-<!-- === KẾT THÚC ĐOẠN CODE CHI TIẾT === -->
-<!-- === BẮT ĐẦU PHẦN BỔ SUNG: BẢNG GIÁ, FORM, BẢN ĐỒ & MÃ QR TÁC GIẢ === -->
+<!-- PHẦN CẨM NANG BỎ TÚI (BẢNG + FORM + MAP) -->
 <style>
   #py-extra-showcase {
     background: #FAF7F2;
     border-top: 1px solid #E8E0D5;
-    padding: 64px 20px 48px;
+    padding: 60px 18px 48px;
     font-family: 'Be Vietnam Pro', sans-serif;
     color: #1E293B;
   }
@@ -1568,11 +1476,11 @@
   }
   .py-sec-header {
     text-align: center;
-    margin-bottom: 36px;
+    margin-bottom: 34px;
   }
   .py-sec-badge {
     display: inline-block;
-    background: rgba(212, 117, 56, 0.12);
+    background: rgba(212, 117, 56, 0.14);
     color: #D47538;
     font-size: 12px;
     font-weight: 700;
@@ -1584,25 +1492,23 @@
   }
   .py-sec-title {
     font-family: 'Playfair Display', serif;
-    font-size: 32px;
+    font-size: 30px;
     font-weight: 700;
     color: #0A3D4C;
     margin: 0 0 8px 0;
   }
   .py-sec-sub {
-    font-size: 15px;
+    font-size: 14.5px;
     color: #64748B;
     margin: 0;
   }
-
-  /* 1. BẢNG THÔNG TIN (TABLE) */
   .py-table-wrap {
     background: #FFFFFF;
     border-radius: 18px;
     box-shadow: 0 10px 30px rgba(10, 61, 76, 0.06);
     border: 1px solid #E8E0D5;
     overflow-x: auto;
-    margin-bottom: 48px;
+    margin-bottom: 44px;
   }
   .py-table {
     width: 100%;
@@ -1615,14 +1521,14 @@
     color: #FFFFFF;
   }
   .py-table th {
-    padding: 16px 20px;
-    font-size: 13px;
+    padding: 15px 18px;
+    font-size: 12.5px;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
   }
   .py-table td {
-    padding: 15px 20px;
+    padding: 14px 18px;
     font-size: 14px;
     border-bottom: 1px solid #F1ECE4;
     color: #334155;
@@ -1642,19 +1548,17 @@
     border-radius: 8px;
     font-size: 13px;
   }
-
-  /* 2. LƯỚI FORM & BẢN ĐỒ */
   .py-grid-2 {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 28px;
-    margin-bottom: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-bottom: 16px;
   }
   .py-card-box {
     background: #FFFFFF;
     border: 1px solid #E8E0D5;
     border-radius: 18px;
-    padding: 28px;
+    padding: 26px;
     box-shadow: 0 10px 30px rgba(10, 61, 76, 0.05);
   }
   .py-card-box h3 {
@@ -1666,7 +1570,7 @@
   .py-card-box p.py-hint {
     font-size: 13.5px;
     color: #64748B;
-    margin: 0 0 20px 0;
+    margin: 0 0 18px 0;
   }
   .py-form-group {
     margin-bottom: 14px;
@@ -1731,12 +1635,10 @@
     border: 0;
     border-radius: 12px;
   }
-
-  /* 3. FOOTER TÁC GIẢ & MÃ QR */
   #py-author-footer {
     background: #062833;
     color: #E2E8F0;
-    padding: 44px 20px;
+    padding: 42px 18px;
     font-family: 'Be Vietnam Pro', sans-serif;
   }
   .py-footer-flex {
@@ -1746,11 +1648,11 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 28px;
+    gap: 24px;
   }
   .py-author-info h4 {
     font-family: 'Playfair Display', serif;
-    font-size: 24px;
+    font-size: 23px;
     color: #FFFFFF;
     margin: 0 0 10px 0;
   }
@@ -1765,17 +1667,17 @@
   }
   .py-qr-card {
     background: #FFFFFF;
-    padding: 14px 18px;
+    padding: 14px 16px;
     border-radius: 16px;
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 14px;
     color: #0A3D4C;
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
   }
   .py-qr-card img {
-    width: 96px;
-    height: 96px;
+    width: 92px;
+    height: 92px;
     border-radius: 8px;
     display: block;
   }
@@ -1792,107 +1694,104 @@
     line-height: 1.4;
   }
 </style>
-
 <section id="py-extra-showcase">
   <div class="py-container">
-    <!-- BẢNG TỔNG HỢP (TABLE) -->
     <div class="py-sec-header">
-      <span class="py-sec-badge">Cẩm nang bỏ túi</span>
-      <h2 class="py-sec-title">Bảng Tổng Hợp Giá & Khung Giờ Thưởng Thức</h2>
-      <p class="py-sec-sub">Thông tin tra cứu nhanh giúp du khách dễ dàng lên kế hoạch khám phá ẩm thực Phú Yên</p>
+      <span class="py-sec-badge" data-vi="Cẩm nang bỏ túi" data-en="Pocket Travel Guide">Cẩm nang bỏ túi</span>
+      <h2 class="py-sec-title" data-vi="Bảng Tổng Hợp Giá & Khung Giờ Thưởng Thức" data-en="Price & Best Dining Hours Overview">Bảng Tổng Hợp Giá & Khung Giờ Thưởng Thức</h2>
+      <p class="py-sec-sub" data-vi="Thông tin tra cứu nhanh giúp du khách dễ dàng lên kế hoạch khám phá ẩm thực Phú Yên" data-en="Quick reference guide to help travelers plan their Phu Yen culinary journey">Thông tin tra cứu nhanh giúp du khách dễ dàng lên kế hoạch khám phá ẩm thực Phú Yên</p>
     </div>
 
     <div class="py-table-wrap">
       <table class="py-table">
         <thead>
           <tr>
-            <th>STT</th>
-            <th>Tên đặc sản</th>
-            <th>Địa phương nổi tiếng</th>
-            <th>Thời điểm lý tưởng</th>
-            <th>Giá tham khảo</th>
+            <th data-vi="STT" data-en="No.">STT</th>
+            <th data-vi="Tên đặc sản" data-en="Specialty Dish">Tên đặc sản</th>
+            <th data-vi="Địa phương nổi tiếng" data-en="Famous Origin">Địa phương nổi tiếng</th>
+            <th data-vi="Thời điểm lý tưởng" data-en="Best Time to Enjoy">Thời điểm lý tưởng</th>
+            <th data-vi="Giá tham khảo" data-en="Est. Price">Giá tham khảo</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <td><strong>01</strong></td>
-            <td><strong>Mắt cá ngừ đại dương</strong></td>
-            <td>TP. Tuy Hòa</td>
-            <td>Buổi tối (17h00 – 22h00)</td>
-            <td><span class="py-price-pill">40.000đ – 60.000đ / thố</span></td>
+            <td><strong data-vi="Mắt cá ngừ đại dương" data-en="Steamed Ocean Tuna Eye">Mắt cá ngừ đại dương</strong></td>
+            <td data-vi="TP. Tuy Hòa" data-en="Tuy Hoa City">TP. Tuy Hòa</td>
+            <td data-vi="Buổi tối (17h00 – 22h00)" data-en="Evening (5:00 PM – 10:00 PM)">Buổi tối (17h00 – 22h00)</td>
+            <td><span class="py-price-pill" data-vi="40.000đ – 60.000đ / thố" data-en="40,000 – 60,000 VND (~$2)">40.000đ – 60.000đ / thố</span></td>
           </tr>
           <tr>
             <td><strong>02</strong></td>
-            <td><strong>Bò một nắng muối kiến vàng</strong></td>
-            <td>Huyện Sơn Hòa</td>
-            <td>Chiều tối / Mua làm quà</td>
-            <td><span class="py-price-pill">250.000đ – 300.000đ / 500g</span></td>
+            <td><strong data-vi="Bò một nắng muối kiến vàng" data-en="Sun-Dried Beef & Weaver Ant Salt">Bò một nắng muối kiến vàng</strong></td>
+            <td data-vi="Huyện Sơn Hòa" data-en="Son Hoa District">Huyện Sơn Hòa</td>
+            <td data-vi="Chiều tối / Mua làm quà" data-en="Late Afternoon / Souvenir">Chiều tối / Mua làm quà</td>
+            <td><span class="py-price-pill" data-vi="250.000đ – 300.000đ / 500g" data-en="250,000 – 300,000 VND (~$11)">250.000đ – 300.000đ / 500g</span></td>
           </tr>
           <tr>
             <td><strong>03</strong></td>
-            <td><strong>Sò huyết đầm Ô Loan</strong></td>
-            <td>Huyện Tuy An</td>
-            <td>Chiều hoàng hôn (15h30 – 18h30)</td>
-            <td><span class="py-price-pill">80.000đ – 150.000đ / đĩa</span></td>
+            <td><strong data-vi="Sò huyết đầm Ô Loan" data-en="O Loan Lagoon Blood Cockles">Sò huyết đầm Ô Loan</strong></td>
+            <td data-vi="Huyện Tuy An" data-en="Tuy An District">Huyện Tuy An</td>
+            <td data-vi="Chiều hoàng hôn (15h30 – 18h30)" data-en="Sunset (3:30 PM – 6:30 PM)">Chiều hoàng hôn (15h30 – 18h30)</td>
+            <td><span class="py-price-pill" data-vi="80.000đ – 150.000đ / đĩa" data-en="80,000 – 150,000 VND (~$4.5)">80.000đ – 150.000đ / đĩa</span></td>
           </tr>
           <tr>
             <td><strong>04</strong></td>
-            <td><strong>Bánh canh hẹ Phú Yên</strong></td>
-            <td>TP. Tuy Hòa</td>
-            <td>Bữa sáng (6h00 – 9h30)</td>
-            <td><span class="py-price-pill">20.000đ – 35.000đ / tô</span></td>
+            <td><strong data-vi="Bánh canh hẹ Phú Yên" data-en="Phu Yen Chive Noodle Soup">Bánh canh hẹ Phú Yên</strong></td>
+            <td data-vi="TP. Tuy Hòa" data-en="Tuy Hoa City">TP. Tuy Hòa</td>
+            <td data-vi="Bữa sáng (6h00 – 9h30)" data-en="Breakfast (6:00 AM – 9:30 AM)">Bữa sáng (6h00 – 9h30)</td>
+            <td><span class="py-price-pill" data-vi="20.000đ – 35.000đ / tô" data-en="20,000 – 35,000 VND (~$1.2)">20.000đ – 35.000đ / tô</span></td>
           </tr>
           <tr>
             <td><strong>05</strong></td>
-            <td><strong>Chả dông Phú Yên</strong></td>
-            <td>TP. Tuy Hòa</td>
-            <td>Bữa trưa & chiều (11h00 – 19h00)</td>
-            <td><span class="py-price-pill">50.000đ – 80.000đ / phần</span></td>
+            <td><strong data-vi="Chả dông Phú Yên" data-en="Crispy Sand Lizard Spring Rolls">Chả dông Phú Yên</strong></td>
+            <td data-vi="TP. Tuy Hòa" data-en="Tuy Hoa City">TP. Tuy Hòa</td>
+            <td data-vi="Bữa trưa & chiều (11h00 – 19h00)" data-en="Lunch & Afternoon (11 AM – 7 PM)">Bữa trưa & chiều (11h00 – 19h00)</td>
+            <td><span class="py-price-pill" data-vi="50.000đ – 80.000đ / phần" data-en="50,000 – 80,000 VND (~$2.5)">50.000đ – 80.000đ / phần</span></td>
           </tr>
         </tbody>
       </table>
     </div>
 
-    <!-- LƯỚI BIỂU MẪU (FORM) + BẢN ĐỒ (IFRAME) -->
     <div class="py-grid-2">
       <!-- FORM GÓP Ý -->
       <div class="py-card-box">
-        <h3>Góc Chia Sẻ & Đánh Giá</h3>
-        <p class="py-hint">Bạn ấn tượng với đặc sản nào nhất? Hãy để lại lời nhắn cho trang web nhé!</p>
+        <h3 data-vi="Góc Chia Sẻ & Đánh Giá" data-en="Traveler Reviews & Tips">Góc Chia Sẻ & Đánh Giá</h3>
+        <p class="py-hint" data-vi="Bạn ấn tượng với đặc sản nào nhất? Hãy để lại lời nhắn cho trang web nhé!" data-en="Which Phu Yen specialty impressed you most? Leave a note for fellow travelers!">Bạn ấn tượng với đặc sản nào nhất? Hãy để lại lời nhắn cho trang web nhé!</p>
         <form id="py-feedback-form" onsubmit="handlePyFeedback(event)">
           <div class="py-form-group">
-            <label for="py-visitor-name">Họ và tên của bạn *</label>
-            <input type="text" id="py-visitor-name" placeholder="Ví dụ: Minh Anh" required />
+            <label for="py-visitor-name" data-vi="Họ và tên của bạn *" data-en="Your Name *">Họ và tên của bạn *</label>
+            <input type="text" id="py-visitor-name" data-ph-vi="Ví dụ: Minh Anh" data-ph-en="e.g., Alex Morgan" placeholder="Ví dụ: Minh Anh" required />
           </div>
           <div class="py-form-group">
-            <label for="py-fav-dish">Món đặc sản bạn yêu thích nhất</label>
+            <label for="py-fav-dish" data-vi="Món đặc sản bạn yêu thích nhất" data-en="Your Favorite Specialty">Món đặc sản bạn yêu thích nhất</label>
             <select id="py-fav-dish">
-              <option value="Mắt cá ngừ đại dương">1. Mắt cá ngừ đại dương</option>
-              <option value="Bò một nắng muối kiến vàng">2. Bò một nắng muối kiến vàng</option>
-              <option value="Sò huyết đầm Ô Loan">3. Sò huyết đầm Ô Loan</option>
-              <option value="Bánh canh hẹ Phú Yên">4. Bánh canh hẹ Phú Yên</option>
-              <option value="Chả dông Phú Yên">5. Chả dông Phú Yên</option>
+              <option value="0" data-vi="1. Mắt cá ngừ đại dương" data-en="1. Steamed Ocean Tuna Eye">1. Mắt cá ngừ đại dương</option>
+              <option value="1" data-vi="2. Bò một nắng muối kiến vàng" data-en="2. Sun-Dried Beef & Weaver Ant Salt">2. Bò một nắng muối kiến vàng</option>
+              <option value="2" data-vi="3. Sò huyết đầm Ô Loan" data-en="3. O Loan Lagoon Blood Cockles">3. Sò huyết đầm Ô Loan</option>
+              <option value="3" data-vi="4. Bánh canh hẹ Phú Yên" data-en="4. Phu Yen Chive Noodle Soup">4. Bánh canh hẹ Phú Yên</option>
+              <option value="4" data-vi="5. Chả dông Phú Yên" data-en="5. Crispy Sand Lizard Spring Rolls">5. Chả dông Phú Yên</option>
             </select>
           </div>
           <div class="py-form-group">
-            <label for="py-visitor-note">Cảm nhận hoặc gợi ý thêm địa điểm ngon *</label>
-            <textarea id="py-visitor-note" rows="3" placeholder="Chia sẻ trải nghiệm ẩm thực của bạn tại Phú Yên..." required></textarea>
+            <label for="py-visitor-note" data-vi="Cảm nhận hoặc gợi ý thêm địa điểm ngon *" data-en="Your Review or Hidden Gem Recommendation *">Cảm nhận hoặc gợi ý thêm địa điểm ngon *</label>
+            <textarea id="py-visitor-note" rows="3" data-ph-vi="Chia sẻ trải nghiệm ẩm thực của bạn tại Phú Yên..." data-ph-en="Share your culinary experience in Phu Yen..." placeholder="Chia sẻ trải nghiệm ẩm thực của bạn tại Phú Yên..." required></textarea>
           </div>
-          <button type="submit" class="py-submit-btn">Gửi cảm nhận ngay</button>
+          <button type="submit" class="py-submit-btn" data-vi="Gửi cảm nhận ngay" data-en="Submit Review">Gửi cảm nhận ngay</button>
           <div id="py-form-result"></div>
         </form>
       </div>
 
-      <!-- BẢN ĐỒ GOOGLE MAPS (IFRAME) -->
+      <!-- BẢN ĐỒ GOOGLE MAPS -->
       <div class="py-card-box">
-        <h3>Bản Đồ Du Lịch & Ẩm Thực Phú Yên</h3>
-        <p class="py-hint">Định vị các tọa độ ẩm thực nổi tiếng tại TP. Tuy Hòa, Đầm Ô Loan và Sơn Hòa</p>
+        <h3 data-vi="Bản Đồ Du Lịch & Ẩm Thực Phú Yên" data-en="Phu Yen Culinary & Travel Map">Bản Đồ Du Lịch & Ẩm Thực Phú Yên</h3>
+        <p class="py-hint" data-vi="Định vị các tọa độ ẩm thực nổi tiếng tại TP. Tuy Hòa, Đầm Ô Loan và Sơn Hòa" data-en="Locate famous dining spots across Tuy Hoa City, O Loan Lagoon, and Son Hoa">Định vị các tọa độ ẩm thực nổi tiếng tại TP. Tuy Hòa, Đầm Ô Loan và Sơn Hòa</p>
         <iframe
           class="py-map-frame"
           src="https://maps.google.com/maps?q=Tuy%20Hoa,%20Phu%20Yen,%20Vietnam&t=&z=11&ie=UTF8&iwloc=&output=embed"
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
-          title="Bản đồ Phú Yên">
+          title="Phu Yen Map">
         </iframe>
       </div>
     </div>
@@ -1903,39 +1802,241 @@
 <footer id="py-author-footer">
   <div class="py-footer-flex">
     <div class="py-author-info">
-      <span class="py-sec-badge" style="background: rgba(255,255,255,0.12); color: #FDBA74;">Dự án Thực hành Tin học 12</span>
-      <h4>PHÚ YÊN — Tinh Hoa Ẩm Thực Xứ Nẫu</h4>
+      <span class="py-sec-badge" style="background: rgba(255,255,255,0.12); color: #FDBA74;" data-vi="Dự án Thực hành Tin học 12" data-en="Grade 12 Informatics Project">Dự án Thực hành Tin học 12</span>
+      <h4 data-vi="PHÚ YÊN — Tinh Hoa Ẩm Thực Xứ Nẫu" data-en="PHU YEN — Culinary Essence of Xu Nau">PHÚ YÊN — Tinh Hoa Ẩm Thực Xứ Nẫu</h4>
       <!-- SỬA THÔNG TIN CÁ NHÂN CỦA BẠN TẠI ĐÂY -->
-      <p>Thực hiện bởi: <span class="py-author-highlight">[Nguyễn Đăng Khoa]</span></p>
-      <p>Lớp: <span class="py-author-highlight">[12C3]</span> — Trường: <span class="py-author-highlight">[Trường THPT Nguyễn Văn Linh]</span></p>
-      <p style="font-size: 12.5px; color: #94A3B8; margin-top: 10px;">Website được thiết kế bằng HTML5, CSS3, JavaScript và xuất bản trực tuyến trên GitHub Pages.</p>
+      <p><span data-vi="Thực hiện bởi:" data-en="Created by:">Thực hiện bởi:</span> <span class="py-author-highlight">[Nguyễn Đăng Khoa]</span></p>
+      <p><span data-vi="Lớp:" data-en="Class:">Lớp:</span> <span class="py-author-highlight">[12C3]</span> — <span data-vi="Trường:" data-en="School:">Trường:</span> <span class="py-author-highlight">[Trường THPT Nguyễn Văn Linh]</span></p>
+      <p style="font-size: 12.5px; color: #94A3B8; margin-top: 10px;" data-vi="Website được thiết kế bằng HTML5, CSS3, JavaScript và xuất bản trực tuyến trên GitHub Pages." data-en="Built with HTML5, CSS3, JavaScript and published live on GitHub Pages.">Website được thiết kế bằng HTML5, CSS3, JavaScript và xuất bản trực tuyến trên GitHub Pages.</p>
     </div>
 
     <div class="py-qr-card">
       <img
         src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&color=0A3D4C&bgcolor=FFFFFF&data=https://khoa32645-hub.github.io/Dac-San-Phu-Yen-78/"
-        alt="Mã QR truy cập website Đặc sản Phú Yên" />
+        alt="QR Code" />
       <div class="py-qr-text">
-        <strong>Quét mã QR truy cập</strong>
-        <span>Đưa camera điện thoại vào mã để mở trực tiếp trang web trên thiết bị di động.</span>
+        <strong data-vi="Quét mã QR truy cập" data-en="Scan QR to Visit">Quét mã QR truy cập</strong>
+        <span data-vi="Đưa camera điện thoại vào mã để mở trực tiếp trang web trên thiết bị di động." data-en="Point your phone camera at the QR code to open this site on mobile.">Đưa camera điện thoại vào mã để mở trực tiếp trang web trên thiết bị di động.</span>
       </div>
     </div>
   </div>
 </footer>
 
 <script>
+  let pyExtraLang = 'vi';
+
+  const PY_DISH_LIST = [
+    {
+      keywords: ["Mắt cá ngừ đại dương", "Ocean Tuna"],
+      vi: {
+        region: "TP. Tuy Hòa • Hải sản đại dương",
+        title: "Mắt cá ngừ đại dương",
+        desc: "Món ăn trứ danh của thủ phủ cá ngừ Tuy Hòa. Mắt cá ngừ to bằng nắm tay được sơ chế kỹ, hầm cách thủy trong thố đất nhỏ cùng thuốc bắc (kỷ tử, táo tàu), sả, ớt hiểm và tiêu xanh. Khi dọn ra vẫn sôi sùng sục, ăn kèm rau tía tô, cải xanh thái sợi và bánh tráng nướng giòn.",
+        time: "Buổi tối hoặc những ngày trời se lạnh, mưa nhẹ (17h00 – 22h00). Thố mắt cá nóng hổi, cay nồng vị tiêu ớt cực kỳ ấm bụng sau một ngày dạo biển.",
+        place: "• Quán ngon: Quán Bà Tám (289 Lê Duẩn, TP. Tuy Hòa) hoặc Quán Sơn Cầu Gỗ (Bờ kè Bạch Đằng).\n• Điểm tham quan gần đó: Tháp Nghinh Phong (ngắm hoàng hôn), Quảng trường 1/4 và Chợ đêm Tuy Hòa."
+      },
+      en: {
+        region: "Tuy Hoa City • Ocean Delicacy",
+        title: "Steamed Ocean Tuna Eye",
+        desc: "The signature dish of Vietnam's tuna capital. A fist-sized ocean tuna eye is carefully cleaned and slow-steamed in a small clay pot with Chinese herbs (goji berries, red dates), lemongrass, chili, and green peppercorns. Served bubbling hot with shredded perilla, mustard greens, and crispy grilled rice paper.",
+        time: "Evenings or breezy coastal nights (5:00 PM – 10:00 PM). The piping-hot, peppery broth is deeply comforting after a day by the sea.",
+        place: "• Top Eateries: Ba Tam Restaurant (289 Le Duan St., Tuy Hoa) or Son Cau Go (Bach Dang Embankment).\n• Nearby Attractions: Nghinh Phong Tower (sunset views), April 1st Square, and Tuy Hoa Night Market."
+      }
+    },
+    {
+      keywords: ["Bò một nắng", "Sun-Dried Beef"],
+      vi: {
+        region: "Huyện Sơn Hòa • Đặc sản núi rừng",
+        title: "Bò một nắng muối kiến vàng",
+        desc: "Thịt thăn bò tơ chăn thả tự nhiên trên vùng đồi núi Sơn Hòa, tẩm ướp gia vị rồi phơi đúng một nắng gắt miền Trung cho se mặt ngoài nhưng bên trong vẫn giữ độ ngọt mềm. Nướng trên than hồng, xé thớ chấm cùng muối kiến vàng chua thanh tự nhiên cực kỳ cuốn hút.",
+        time: "Bữa chiều tối tụ tập bạn bè hoặc mua làm quà biếu (quanh năm, ngon nhất mùa nắng từ tháng 1 – tháng 8).",
+        place: "• Quán ngon & Mua sắm: Các quán đặc sản thị trấn Củng Sơn (Sơn Hòa) hoặc cửa hàng đặc sản đường Lê Lợi, Trần Hưng Đạo (TP. Tuy Hòa).\n• Điểm tham quan gần đó: Cao nguyên Vân Hòa (Đà Lạt thu nhỏ của Phú Yên) và Đập Đồng Cam."
+      },
+      en: {
+        region: "Son Hoa District • Highland Specialty",
+        title: "Sun-Dried Beef with Weaver Ant Salt",
+        desc: "Prime tenderloin from free-range mountain cattle in Son Hoa, marinated with aromatic spices and cured under a single day of intense Central Vietnam sunshine. Charcoal-grilled and hand-shredded, it is dipped into tangy, wild-harvested weaver ant salt.",
+        time: "Late afternoon gatherings or as vacuum-sealed gifts (year-round, best during the sunny season from January to August).",
+        place: "• Dining & Shopping: Local eateries in Cung Son Town (Son Hoa) or specialty shops along Le Loi & Tran Hung Dao St. (Tuy Hoa).\n• Nearby Attractions: Van Hoa Plateau ('Mini Da Lat' of Phu Yen) and Dong Cam Dam."
+      }
+    },
+    {
+      keywords: ["Sò huyết đầm Ô Loan", "O Loan"],
+      vi: {
+        region: "Đầm Ô Loan • Tuy An",
+        title: "Sò huyết đầm Ô Loan",
+        desc: "Nhờ nguồn nước lợ giao hòa giữa sông và biển, sò huyết đầm Ô Loan có kích thước to, thịt dày đỏ au, vị ngọt đậm và béo ngậy vượt trội. Ngon nhất là sò huyết nướng mọi vừa chín tới, rang me hoặc xào tỏi, ăn kèm rau răm và muối tiêu chanh.",
+        time: "Buổi chiều tà ngắm hoàng hôn trên đầm (15h30 – 18h30), đặc biệt từ tháng 3 đến tháng 8 khi biển êm và sò béo mập nhất năm.",
+        place: "• Quán ngon: Các nhà hàng bè nổi dọc cầu An Hải hoặc ven đầm Ô Loan (xã An Hải, huyện Tuy An).\n• Điểm tham quan gần đó: Gành Đá Đĩa, Hòn Yến (ngắm san hô khi thủy triều rút) và Nhà thờ Mằng Lăng."
+      },
+      en: {
+        region: "O Loan Lagoon • Tuy An District",
+        title: "O Loan Lagoon Blood Cockles",
+        desc: "Nourished by the brackish waters where river meets sea, O Loan blood cockles are prized nationwide for their plump size, rich red flesh, and sweet, buttery flavor. Best enjoyed charcoal-grilled medium-rare, tamarind-glazed, or garlic-sautéed with Vietnamese coriander and lime-pepper salt.",
+        time: "Late afternoon sunset over the lagoon (3:30 PM – 6:30 PM), especially from March to August when the cockles are at their plumpest.",
+        place: "• Top Eateries: Floating raft restaurants near An Hai Bridge along O Loan Lagoon (An Hai Commune, Tuy An).\n• Nearby Attractions: Ganh Da Dia (Basalt Columns), Hon Yen Reef, and Mang Lang Church."
+      }
+    },
+    {
+      keywords: ["Bánh canh hẹ", "Chive Noodle"],
+      vi: {
+        region: "TP. Tuy Hòa • Ẩm thực dân dã",
+        title: "Bánh canh hẹ Phú Yên",
+        desc: "Điểm tâm quốc dân của người Xứ Nẫu với sợi bánh canh bột gạo mềm dai, nước dùng ninh từ cá biển ngọt thanh, chả cá chiên vàng ươm, trứng cút và phủ kín bên trên là lớp lá hẹ xanh mướt thái nhuyễn thơm nồng.",
+        time: "Bữa sáng sớm (6h00 – 9h30) để nạp năng lượng dạo phố hoặc bữa xế chiều (15h00 – 19h00) nhẹ bụng mà vẫn đậm đà.",
+        place: "• Quán ngon: Bánh canh hẹ Thành Tâm (53 Điện Biên Phủ) hoặc khu vực Bưu điện tỉnh (đường Trần Hưng Đạo, TP. Tuy Hòa).\n• Điểm tham quan gần đó: Tháp Nhạn (ngắm toàn cảnh thành phố và sông Đà Rằng), Bãi biển Tuy Hòa."
+      },
+      en: {
+        region: "Tuy Hoa City • Everyday Comfort Food",
+        title: "Phu Yen Chive Noodle Soup",
+        desc: "The beloved breakfast staple of Xu Nau: silky rice noodles in a clear, sweet ocean-fish broth, topped with golden fried fish cakes, quail eggs, and a generous blanket of finely chopped emerald-green chives.",
+        time: "Early breakfast (6:00 AM – 9:30 AM) before exploring the city, or a light afternoon snack (3:00 PM – 7:00 PM).",
+        place: "• Top Eateries: Thanh Tam Chive Noodles (53 Dien Bien Phu St.) or stalls near the Provincial Post Office (Tran Hung Dao St.).\n• Nearby Attractions: Nhan Cham Tower (panoramic views over Da Rang River) and Tuy Hoa Beach."
+      }
+    },
+    {
+      keywords: ["Chả dông", "Sand Lizard"],
+      vi: {
+        region: "TP. Tuy Hòa • Mỹ vị vùng cát",
+        title: "Chả dông Phú Yên",
+        desc: "Dông cát sống ở các đồi cát ven biển có thịt trắng, săn chắc và ngọt thanh. Thịt dông được băm nhuyễn cùng nấm mèo, miến dong, hành tím và tiêu, cuốn bánh tráng mỏng chiên giòn rụm, ăn kèm rau sống, xoài xanh và mắm nêm.",
+        time: "Bữa trưa hoặc chiều muộn (11h00 – 19h00), lý tưởng nhất vào mùa hè (tháng 4 – tháng 9) khi dông cát vào mùa béo nhất.",
+        place: "• Quán ngon: Chả dông 92 Nguyễn Công Trứ hoặc các quán đặc sản dọc đường Trần Bình Trọng (TP. Tuy Hòa).\n• Điểm tham quan gần đó: Bãi Xép (phim trường Hoa vàng trên cỏ xanh) và Mũi Điện (Bãi Môn)."
+      },
+      en: {
+        region: "Tuy Hoa City • Coastal Dunes Delicacy",
+        title: "Crispy Sand Lizard Spring Rolls",
+        desc: "Wild sand lizards from coastal dunes yield lean, sweet white meat. Minced with wood-ear mushrooms, glass noodles, shallots, and black pepper, rolled in thin rice paper and fried until golden crisp, served with fresh herbs, green mango, and fermented anchovy dip.",
+        time: "Lunch or early dinner (11:00 AM – 7:00 PM), best during summer months (April – September).",
+        place: "• Top Eateries: Cha Dong 92 Nguyen Cong Tru St. or local eateries along Tran Binh Trong St. (Tuy Hoa).\n• Nearby Attractions: Bai Xep Beach and Mui Dien Lighthouse (Vietnam's easternmost mainland sunrise point)."
+      }
+    }
+  ];
+
+  function setPyExtraLang(lang) {
+    if (lang !== 'vi' && lang !== 'en') return;
+    pyExtraLang = lang;
+
+    document.querySelectorAll('#py-extra-showcase [data-vi], #py-author-footer [data-vi]').forEach(el => {
+      el.textContent = el.getAttribute('data-' + lang);
+    });
+
+    document.querySelectorAll('#py-extra-showcase [data-ph-vi]').forEach(el => {
+      el.placeholder = el.getAttribute('data-ph-' + lang);
+    });
+
+    const timeLbl = document.getElementById('py-modal-time-label');
+    const placeLbl = document.getElementById('py-modal-place-label');
+    if (timeLbl) timeLbl.textContent = lang === 'en' ? '⏰ Ideal Time to Enjoy' : '⏰ Thời điểm lý tưởng để thưởng thức';
+    if (placeLbl) placeLbl.textContent = lang === 'en' ? '📍 Recommended Spots & Nearby Attractions' : '📍 Địa điểm hấp dẫn & Quán ngon gợi ý';
+  }
+
+  function detectMainPageLang() {
+    const bodyText = document.body ? document.body.innerText : '';
+    if (document.documentElement.lang === 'en' || bodyText.includes('5 SIGNATURE DISHES') || bodyText.includes('24H TASTING ROUTE')) {
+      if (pyExtraLang !== 'en') setPyExtraLang('en');
+    } else if (bodyText.includes('KHÁM PHÁ 5 ĐẶC SẢN') || bodyText.includes('Hành trình vị giác')) {
+      if (pyExtraLang !== 'vi') setPyExtraLang('vi');
+    }
+  }
+
+  document.addEventListener('click', function(e) {
+    const target = e.target.closest('button, a, span');
+    if (target) {
+      const txt = (target.textContent || '').trim();
+      if (txt === 'EN') setPyExtraLang('en');
+      if (txt === 'VI') setPyExtraLang('vi');
+    }
+    setTimeout(detectMainPageLang, 60);
+  });
+
+  window.addEventListener('DOMContentLoaded', detectMainPageLang);
+  setTimeout(detectMainPageLang, 300);
+
+  function openPyDetailModal(dishObj) {
+    const data = dishObj[pyExtraLang] || dishObj.vi;
+    document.getElementById('py-modal-region').innerText = data.region;
+    document.getElementById('py-modal-title').innerText = data.title;
+    document.getElementById('py-modal-desc').innerText = data.desc;
+    document.getElementById('py-modal-time').innerText = data.time;
+    document.getElementById('py-modal-place').innerHTML = data.place.replace(/\n/g, '<br>');
+    const overlay = document.getElementById('py-detail-overlay');
+    overlay.style.display = 'flex';
+    overlay.classList.add('active');
+  }
+
+  function closePyDetailModal() {
+    const overlay = document.getElementById('py-detail-overlay');
+    if (overlay) {
+      overlay.classList.remove('active');
+      overlay.style.display = 'none';
+    }
+  }
+
+  (function() {
+    const overlay = document.getElementById('py-detail-overlay');
+    if (overlay) {
+      overlay.addEventListener('click', function(e) {
+        if (e.target === overlay || e.target.closest('.py-close-btn')) {
+          closePyDetailModal();
+        }
+      });
+    }
+  })();
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closePyDetailModal();
+  });
+
+  document.addEventListener('click', function(e) {
+    if (e.target.closest('#py-detail-overlay') || e.target.closest('.fixed') || e.target.closest('[role="dialog"]')) {
+      return;
+    }
+    if (!e.target.closest('#specialties')) {
+      return;
+    }
+    const btn = e.target.closest('button');
+    if (btn && (btn.innerText.includes('Lưu') || btn.innerText.includes('Save') || btn.innerText.includes('Đã lưu') || btn.innerText.includes('Saved'))) {
+      return;
+    }
+
+    let el = e.target;
+    let matchedDish = null;
+
+    while (el && el !== document.body) {
+      const text = el.innerText || '';
+      const found = PY_DISH_LIST.filter(d => d.keywords.some(kw => text.includes(kw)));
+      if (found.length === 1 && el.querySelector('img')) {
+        matchedDish = found[0];
+        break;
+      }
+      el = el.parentElement;
+    }
+
+    if (matchedDish) {
+      e.preventDefault();
+      e.stopPropagation();
+      openPyDetailModal(matchedDish);
+    }
+  }, true);
+
   function handlePyFeedback(e) {
     e.preventDefault();
     const name = document.getElementById('py-visitor-name').value.trim();
-    const dish = document.getElementById('py-fav-dish').value;
+    const selectEl = document.getElementById('py-fav-dish');
+    const dishName = selectEl.options[selectEl.selectedIndex].text.replace(/^\d+\.\s*/, '');
     const note = document.getElementById('py-visitor-note').value.trim();
     const box = document.getElementById('py-form-result');
 
     box.style.display = 'block';
-    box.innerHTML = '✅ Cảm ơn <strong>' + name + '</strong>! Đánh giá của bạn về món <strong>' + dish + '</strong> (<em>"' + note + '"</em>) đã được ghi nhận.';
+    if (pyExtraLang === 'en') {
+      box.innerHTML = '✅ Thank you, <strong>' + name + '</strong>! Your review for <strong>' + dishName + '</strong> (<em>"' + note + '"</em>) has been recorded.';
+    } else {
+      box.innerHTML = '✅ Cảm ơn <strong>' + name + '</strong>! Đánh giá của bạn về món <strong>' + dishName + '</strong> (<em>"' + note + '"</em>) đã được ghi nhận.';
+    }
     document.getElementById('py-feedback-form').reset();
+    setPyExtraLang(pyExtraLang);
   }
 </script>
-<!-- === KẾT THÚC PHẦN BỔ SUNG === -->
 </body>
 </html>
