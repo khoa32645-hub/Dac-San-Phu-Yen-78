@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PHÚ YÊN — Tinh Hoa Ẩm Thực Xứ Nẫu | Culinary & Heritage Guide</title>
+
+  <!-- Google Fonts: Playfair Display (Editorial Serif) & Be Vietnam Pro (Modern Vietnamese Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            sand: '#FAF7F2',
+            alabaster: '#FFFFFF',
+            hairline: '#E8E0D5',
+            ocean: {
+              DEFAULT: '#0A3D4C',
+              light: '#13576B',
+              dark: '#062833'
+            },
+            terracotta: {
+              DEFAULT: '#D47538',
+              light: '#E68D53',
+              dark: '#B55D24'
+            },
+            sage: '#4A7C6F',
+            slateDeep: '#1A242B',
+            slateMuted: '#5A6872'
+          },
+          fontFamily: {
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+            sans: ['"Be Vietnam Pro"', 'system-ui', 'sans-serif']
+          },
+          boxShadow: {
+            editorial: '0 20px 50px -15px rgba(10, 61, 76, 0.08)',
+            cardHover: '0 25px 60px -12px rgba(10, 61, 76, 0.16)'
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      --bg-sand: #FAF7F2;
+      --accent-ocean: #0A3D4C;
+      --accent-terracotta: #D47538;
+      --accent-sage: #4A7C6F;
+      --border-warm: #E8E0D5;
+    }
+
+    body {
+      background-color: var(--bg-sand);
+      color: #1A242B;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Subtle coastal paper grain overlay */
+    .paper-texture {
+      background-image: radial-gradient(rgba(10, 61, 76, 0.04) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+
+    /* Glassmorphism utilities */
+    .glass-nav {
+      background: rgba(250, 247, 242, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(232, 224, 213, 0.9);
+    }
+
+    .glass-hero-card {
+      background: rgba(10, 61, 76, 0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    /* Scroll reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1), transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Dish card image zoom */
+    .dish-card:hover .dish-img {
+      transform: scale(1.06);
+    }
+
+    .dish-img {
+      transition: transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Flavor bar transition */
+    .flavor-fill {
+      transition: width 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #FAF7F2;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #C8BEB0;
+      border-radius: 999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #0A3D4C;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-terracotta selection:text-white">
+
+  <!-- ==================== STICKY GLASSMORPHIC NAVBAR ==================== -->
+  <header class="fixed top-0 inset-x-0 z-40 glass-nav transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      <!-- Brand Emblem & Title -->
+      <a href="#" class="flex items-center gap-3 group focus:outline-none">
+        <div class="w-11 h-11 rounded-2xl bg-ocean text-sand flex items-center justify-center shadow-md group-hover:bg-terracotta transition-colors duration-300">
+          <!-- Custom Coastal Sun & Basalt Column SVG Emblem -->
+          <svg class="w-6 h-6" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="16" cy="11" r="4.5" />
+            <path d="M4 21c3.5-2 7-2 10.5 0s7 2 13.5 0" stroke-linecap="round" />
+            <path d="M6 25.5c3-1.5 6-1.5 9 0s6 1.5 11 0" stroke-linecap="round" />
+          </svg>
+        </div>
+        <div>
+          <span class="font-serif text-xl sm:text-2xl font-bold tracking-wider text-ocean block leading-none">PHÚ YÊN</span>
+          <span class="text-[11px] uppercase tracking-[0.2em] text-slateMuted font-medium block mt-1" data-i18n="brandSub">Xứ Nẫu Culinary Atlas</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slateDeep">
+        <a href="#specialties" class="hover:text-terracotta transition-colors py-2" data-i18n="navSpecialties">Khám phá 5 đặc sản</a>
+        <a href="#itinerary" class="hover:text-terracotta transition-colors py-2" data-i18n="navItinerary">Hành trình vị giác</a>
+        <a href="#guide" class="hover:text-terracotta transition-colors py-2" data-i18n="navGuide">Cẩm nang du lịch</a>
+      </nav>
+
+      <!-- Right Controls: Language Switcher + My Food Trip Button -->
+      <div class="flex items-center gap-2.5 sm:gap-3">
+        <!-- Bilingual VI / EN Switcher -->
+        <div class="inline-flex items-center bg-white border border-hairline rounded-full p-1 shadow-sm" role="group" aria-label="Language Switcher">
+          <button id="btnLangVI" onclick="setLanguage('vi')" class="px-2.5 py-1 rounded-full text-xs font-semibold transition-all bg-ocean text-white">
+            VI
+          </button>
+          <button id="btnLangEN" onclick="setLanguage('en')" class="px-2.5 py-1 rounded-full text-xs font-semibold transition-all text-slateMuted hover:text-ocean">
+            EN
+          </button>
+        </div>
+
+        <!-- My Food Trip Drawer Trigger -->
+        <button onclick="toggleTripDrawer(true)" class="inline-flex items-center gap-2 bg-ocean hover:bg-ocean-light text-white text-xs sm:text-sm font-medium px-3.5 sm:px-4 py-2.5 rounded-full shadow-sm transition-all active:scale-95">
+          <svg class="w-4 h-4 text-terracotta-light" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+          </svg>
+          <span class="hidden sm:inline" data-i18n="navMyTrip">Lịch trình của tôi</span>
+          <span id="tripBadge" class="inline-flex items-center justify-center min-w-[20px] h-5 px-1.5 text-xs font-bold rounded-full bg-terracotta text-white">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== CINEMATIC HERO SECTION ==================== -->
+  <section class="relative pt-28 pb-16 sm:pt-36 sm:pb-24 overflow-hidden">
+    <!-- Atmospheric Coastal Backdrop -->
+    <div class="absolute inset-0 z-0">
+      <img
+        src="https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?auto=format&fit=crop&w=2000&q=85"
+        alt="Bờ biển Phú Yên - Vùng đất Hoa Vàng Trên Cỏ Xanh"
+        class="w-full h-full object-cover object-center"
+        onerror="this.style.display='none'"
+      />
+      <!-- Rich Coastal Gradient Scrim ensuring ultra-high legibility -->
+      <div class="absolute inset-0 bg-gradient-to-b from-ocean-dark/85 via-ocean/80 to-sand"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center text-white">
+        <!-- Eyebrow Badge -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-md border border-white/25 text-xs sm:text-sm font-medium tracking-widest uppercase text-amber-200 mb-6">
+          <span class="w-2 h-2 rounded-full bg-terracotta animate-pulse"></span>
+          <span data-i18n="heroEyebrow">DI SẢN ẨM THỰC MIỀN TRUNG • VIỆT NAM</span>
+        </div>
+
+        <!-- Main Editorial Title -->
+        <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-5 drop-shadow-sm" data-i18n="heroTitle">
+          Khám Phá 5 Tuyệt Tác Đặc Sản Phú Yên
+        </h1>
+
+        <!-- Heartfelt Motto from Original Student Page -->
+        <p class="font-serif italic text-xl sm:text-2xl text-amber-200/95 mb-4" data-i18n="heroMotto">
+          “Hương vị miền biển – Đậm đà bản sắc quê hương”
+        </p>
+
+        <!-- Welcoming Subtitle -->
+        <p class="text-base sm:text-lg text-slate-100/90 leading-relaxed max-w-2xl mx-auto mb-9 font-light" data-i18n="heroDesc">
+          Chào mừng bạn đến với vùng đất “Hoa vàng trên cỏ xanh”. Nơi đại dương xanh thẳm gặp gỡ núi rừng Trường Sơn để chắt chiu nên những mỹ vị làm say lòng du khách năm châu.
+        </p>
+
+        <!-- Dual Action CTAs -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="#specialties" class="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 bg-terracotta hover:bg-terracotta-light text-white font-semibold px-7 py-4 rounded-full shadow-lg transition-all transform hover:-translate-y-0.5">
+            <span data-i18n="heroCtaPrimary">Khám phá 5 đặc sản</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </a>
+          <a href="#itinerary" class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/15 hover:bg-white/25 backdrop-blur-md text-white border border-white/30 font-medium px-7 py-4 rounded-full transition-all">
+            <svg class="w-4 h-4 text-amber-200" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span data-i18n="heroCtaSecondary">Gợi ý lịch trình 24 giờ</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Floating Editorial Stats Strip -->
+      <div class="mt-14 sm:mt-16 max-w-4xl mx-auto glass-hero-card rounded-3xl p-6 sm:p-8 text-white shadow-2xl">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-4 text-center divide-y sm:divide-y-0 sm:divide-x divide-white/15">
+          <div class="pt-2 sm:pt-0">
+            <div class="font-serif text-3xl sm:text-4xl font-bold text-amber-300">05</div>
+            <div class="text-xs sm:text-sm uppercase tracking-wider text-slate-200 mt-1" data-i18n="stat1Label">Tuyệt phẩm di sản</div>
+          </div>
+          <div class="pt-4 sm:pt-0">
+            <div class="font-serif text-3xl sm:text-4xl font-bold text-amber-300">189 km</div>
+            <div class="text-xs sm:text-sm uppercase tracking-wider text-slate-200 mt-1" data-i18n="stat2Label">Bờ biển & đầm phá nguyên sơ</div>
+          </div>
+          <div class="pt-4 sm:pt-0">
+            <div class="font-serif text-3xl sm:text-4xl font-bold text-amber-300">4.9 ★</div>
+            <div class="text-xs sm:text-sm uppercase tracking-wider text-slate-200 mt-1" data-i18n="stat3Label">Đánh giá du khách quốc tế</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 5 SPECIALTIES SHOWCASE SECTION ==================== -->
+  <section id="specialties" class="py-16 sm:py-24 paper-texture">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 reveal">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-[0.22em] text-terracotta block mb-2" data-i18n="sec1Eyebrow">BẢN ĐỒ VỊ GIÁC XỨ NẪU</span>
+          <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-ocean leading-tight" data-i18n="sec1Title">
+            Năm Tinh Hoa Ẩm Thực Nhất Định Phải Thử
+          </h2>
+        </div>
+        <p class="text-slateMuted max-w-md text-sm sm:text-base leading-relaxed" data-i18n="sec1Desc">
+          Từ đại dương sâu thẳm Tuy Hòa, đầm Ô Loan lộng gió đến cao nguyên Sơn Hòa nắng cháy — mỗi món ăn là một câu chuyện văn hóa bản địa.
+        </p>
+      </div>
+
+      <!-- Interactive Category Filters & Search Bar -->
+      <div class="bg-white border border-hairline rounded-3xl p-4 sm:p-5 shadow-editorial mb-10 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4 reveal">
+        <!-- Category Pills -->
+        <div id="filterPills" class="flex flex-wrap items-center gap-2">
+          <button onclick="setFilter('all')" data-filter="all" class="filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-ocean text-white">
+            <span data-i18n="filterAll">Tất cả (5)</span>
+          </button>
+          <button onclick="setFilter('seafood')" data-filter="seafood" class="filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all bg-sand text-slateDeep hover:bg-ocean/10">
+            <span data-i18n="filterSeafood">Hải sản đại dương</span>
+          </button>
+          <button onclick="setFilter('highland')" data-filter="highland" class="filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all bg-sand text-slateDeep hover:bg-ocean/10">
+            <span data-i18n="filterHighland">Đặc sản núi rừng</span>
+          </button>
+          <button onclick="setFilter('street')" data-filter="street" class="filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all bg-sand text-slateDeep hover:bg-ocean/10">
+            <span data-i18n="filterStreet">Ẩm thực dân dã</span>
+          </button>
+        </div>
+
+        <!-- Search Input -->
+        <div class="relative w-full md:w-72">
+          <svg class="w-4 h-4 text-slateMuted absolute left-4 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
+          </svg>
+          <input
+            id="searchInput"
+            type="text"
+            oninput="handleSearch(this.value)"
+            placeholder="Tìm món ăn, nguyên liệu..."
+            data-i18n-placeholder="searchPlaceholder"
+            class="w-full pl-10 pr-4 py-2.5 rounded-full bg-sand border border-hairline text-sm text-slateDeep placeholder-slateMuted focus:outline-none focus:border-ocean focus:bg-white transition-colors"
+          />
+        </div>
+      </div>
+
+      <!-- Editorial Dish Cards Grid -->
+      <div id="dishesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Populated dynamically by JavaScript -->
+      </div>
+
+      <!-- Empty Search State -->
+      <div id="emptyState" class="hidden text-center py-16 bg-white rounded-3xl border border-hairline">
+        <p class="font-serif text-2xl text-ocean mb-2" data-i18n="emptyTitle">Không tìm thấy món ăn phù hợp</p>
+        <p class="text-sm text-slateMuted mb-5" data-i18n="emptyDesc">Hãy thử tìm với từ khóa khác hoặc đặt lại bộ lọc danh mục nhé.</p>
+        <button onclick="resetFilters()" class="px-5 py-2.5 rounded-full bg-ocean text-white text-sm font-medium hover:bg-ocean-light transition-colors" data-i18n="emptyReset">
+          Xem tất cả 5 đặc sản
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== 24-HOUR TASTING ROUTE SECTION ==================== -->
+  <section id="itinerary" class="py-16 sm:py-24 bg-ocean text-white relative overflow-hidden">
+    <!-- Subtle Decorative Wave Lines -->
+    <div class="absolute top-0 right-0 w-96 h-96 bg-terracotta/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-sage/15 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3 pointer-events-none"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14 reveal">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-[0.22em] text-amber-300 block mb-2" data-i18n="sec2Eyebrow">CURATED FOOD TOUR • 24 GIỜ</span>
+          <h2 class="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight" data-i18n="sec2Title">
+            Hành Trình Săn Mỹ Vị Phú Yên Trọn Vẹn
+          </h2>
+        </div>
+        <button onclick="loadSuggestedRoute()" class="self-start lg:self-auto inline-flex items-center gap-2.5 bg-terracotta hover:bg-terracotta-light text-white font-semibold px-6 py-3.5 rounded-full shadow-lg transition-all active:scale-95">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+          </svg>
+          <span data-i18n="applyRouteBtn">Áp dụng lịch trình gợi ý 24h</span>
+        </button>
+      </div>
+
+      <!-- 4 Time-of-Day Milestones -->
+      <div id="timelineGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 reveal">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== INTERNATIONAL TRAVELER'S GUIDE ==================== -->
+  <section id="guide" class="py-16 sm:py-24 paper-texture">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14 reveal">
+        <span class="text-xs font-bold uppercase tracking-[0.22em] text-terracotta block mb-2" data-i18n="sec3Eyebrow">CẨM NANG DU KHÁCH QUỐC TẾ</span>
+        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-ocean mb-4" data-i18n="sec3Title">
+          Bí Quyết Trải Nghiệm Phú Yên Trọn Vẹn
+        </h2>
+        <p class="text-slateMuted text-sm sm:text-base" data-i18n="sec3Desc">
+          Những thông tin hữu ích giúp chuyến du ngoạn và khám phá ẩm thực Xứ Nẫu của bạn thêm phần đáng nhớ.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 reveal">
+        <!-- Guide Card 1: Best Time -->
+        <div class="bg-white border border-hairline rounded-3xl p-8 shadow-editorial hover:shadow-cardHover transition-all">
+          <div class="w-12 h-12 rounded-2xl bg-amber-50 text-terracotta flex items-center justify-center mb-6">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+          </div>
+          <h3 class="font-serif text-xl font-bold text-ocean mb-3" data-i18n="guide1Title">Thời điểm vàng ghé thăm</h3>
+          <p class="text-sm text-slateMuted leading-relaxed" data-i18n="guide1Desc">
+            Từ tháng 1 đến tháng 8 hằng năm là mùa khô lý tưởng tại Phú Yên. Biển êm, nắng vàng rực rỡ và nguồn hải sản đầm Ô Loan, vịnh Xuân Đài vào mùa tươi ngon nhất.
+          </p>
+        </div>
+
+        <!-- Guide Card 2: Iconic Landmarks -->
+        <div class="bg-white border border-hairline rounded-3xl p-8 shadow-editorial hover:shadow-cardHover transition-all">
+          <div class="w-12 h-12 rounded-2xl bg-teal-50 text-ocean flex items-center justify-center mb-6">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+          </div>
+          <h3 class="font-serif text-xl font-bold text-ocean mb-3" data-i18n="guide2Title">Kết hợp thắng cảnh kỳ vĩ</h3>
+          <p class="text-sm text-slateMuted leading-relaxed" data-i18n="guide2Desc">
+            Đừng quên ghé Gành Đá Đĩa kỳ quan địa chất độc nhất vô nhị, Bãi Xép phim trường “Hoa vàng trên cỏ xanh” và Mũi Điện — nơi đón ánh bình minh đầu tiên trên đất liền Việt Nam.
+          </p>
+        </div>
+
+        <!-- Guide Card 3: Culinary Gifts -->
+        <div class="bg-white border border-hairline rounded-3xl p-8 shadow-editorial hover:shadow-cardHover transition-all">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-50 text-sage flex items-center justify-center mb-6">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+            </svg>
+          </div>
+          <h3 class="font-serif text-xl font-bold text-ocean mb-3" data-i18n="guide3Title">Đặc sản mang về làm quà</h3>
+          <p class="text-sm text-slateMuted leading-relaxed" data-i18n="guide3Desc">
+            Bò một nắng đóng gói hút chân không kèm hũ muối kiến vàng Sơn Hòa, bánh tráng Hòa Đa dẻo thơm hay khô cá ngừ đại dương là những món quà đậm tình Xứ Nẫu dành cho người thân.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== EDITORIAL FOOTER ==================== -->
+  <footer class="bg-ocean-dark text-slate-300 py-14 border-t border-white/10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div class="text-center md:text-left">
+        <div class="font-serif text-2xl font-bold text-white tracking-wider">PHÚ YÊN — XỨ NẪU</div>
+        <p class="text-sm text-slate-400 mt-1" data-i18n="footerTagline">
+          Hương vị miền biển – Đậm đà bản sắc quê hương Việt Nam.
+        </p>
+      </div>
+      <div class="flex flex-wrap justify-center gap-6 text-xs uppercase tracking-widest text-slate-400">
+        <a href="#specialties" class="hover:text-amber-300 transition-colors" data-i18n="navSpecialties">5 Đặc sản</a>
+        <a href="#itinerary" class="hover:text-amber-300 transition-colors" data-i18n="navItinerary">Hành trình 24h</a>
+        <a href="#guide" class="hover:text-amber-300 transition-colors" data-i18n="navGuide">Cẩm nang</a>
+      </div>
+      <div class="text-xs text-slate-400 text-center md:text-right">
+        <span data-i18n="footerCredit">Quảng bá Du lịch & Ẩm thực Phú Yên ra Thế Giới</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== DISH DETAIL MODAL ==================== -->
+  <div id="dishModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 bg-ocean-dark/75 backdrop-blur-sm transition-opacity" role="dialog" aria-modal="true">
+    <div class="bg-white border border-hairline rounded-3xl max-w-3xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative animate-[fadeIn_0.25s_ease-out]">
+      <!-- Close Button -->
+      <button onclick="closeDishModal()" aria-label="Đóng" class="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-white/90 hover:bg-terracotta text-ocean hover:text-white flex items-center justify-center shadow-md transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <div id="modalBody">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== SLIDE-OVER MY FOOD TRIP DRAWER ==================== -->
+  <div id="tripDrawerOverlay" onclick="toggleTripDrawer(false)" class="fixed inset-0 z-50 hidden bg-ocean-dark/60 backdrop-blur-xs transition-opacity"></div>
+  <aside id="tripDrawer" class="fixed top-0 right-0 bottom-0 z-50 w-full max-w-md bg-sand border-l border-hairline shadow-2xl transform translate-x-full transition-transform duration-300 flex flex-col">
+    <!-- Drawer Header -->
+    <div class="p-6 bg-ocean text-white flex items-center justify-between">
+      <div>
+        <span class="text-[11px] uppercase tracking-widest text-amber-300 block" data-i18n="drawerEyebrow">MY CULINARY PASSPORT</span>
+        <h3 class="font-serif text-2xl font-bold" data-i18n="drawerTitle">Lịch Trình Ẩm Thực Của Tôi</h3>
+      </div>
+      <button onclick="toggleTripDrawer(false)" class="w-9 h-9 rounded-full bg-white/15 hover:bg-white/25 flex items-center justify-center transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Drawer Content -->
+    <div id="tripListContainer" class="flex-1 overflow-y-auto p-6 space-y-4">
+      <!-- Populated dynamically -->
+    </div>
+
+    <!-- Drawer Footer (Budget + Copy/Clear Actions) -->
+    <div class="p-6 bg-white border-t border-hairline space-y-4">
+      <div class="flex items-center justify-between text-sm">
+        <span class="text-slateMuted font-medium" data-i18n="drawerBudgetLabel">Chi phí thưởng thức dự kiến:</span>
+        <div class="text-right">
+          <span id="totalBudgetVND" class="font-bold text-ocean text-base block">0 đ</span>
+          <span id="totalBudgetUSD" class="text-xs text-slateMuted">~$0.00 USD</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-3">
+        <button onclick="clearTrip()" class="py-3 px-4 rounded-2xl border border-hairline text-slateMuted hover:text-ocean hover:bg-sand text-xs sm:text-sm font-semibold transition-colors" data-i18n="drawerClearBtn">
+          Xóa tất cả
+        </button>
+        <button onclick="copyItinerary()" class="py-3 px-4 rounded-2xl bg-terracotta hover:bg-terracotta-light text-white text-xs sm:text-sm font-semibold shadow-md transition-all flex items-center justify-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
+          </svg>
+          <span data-i18n="drawerCopyBtn">Sao chép lịch trình</span>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==================== TOAST NOTIFICATION ==================== -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 translate-y-4 transition-all duration-300">
+    <div class="bg-ocean-dark text-white px-5 py-3 rounded-full shadow-xl border border-white/15 flex items-center gap-2.5 text-sm font-medium">
+      <span class="w-2.5 h-2.5 rounded-full bg-terracotta"></span>
+      <span id="toastMessage">Đã thêm vào lịch trình!</span>
+    </div>
+  </div>
+
+  <!-- ==================== JAVASCRIPT APPLICATION LOGIC ==================== -->
+  <script>
+    // 1. UI TRANSLATION DICTIONARY (VIETNAMESE & ENGLISH)
+    const i18n = {
+      vi: {
+        brandSub: 'Xứ Nẫu Culinary Atlas',
+        navSpecialties: 'Khám phá 5 đặc sản',
+        navItinerary: 'Hành trình vị giác',
+        navGuide: 'Cẩm nang du lịch',
+        navMyTrip: 'Lịch trình của tôi',
+        heroEyebrow: 'DI SẢN ẨM THỰC MIỀN TRUNG • VIỆT NAM',
+        heroTitle: 'Khám Phá 5 Tuyệt Tác Đặc Sản Phú Yên',
+        heroMotto: '“Hương vị miền biển – Đậm đà bản sắc quê hương”',
+        heroDesc: 'Chào mừng bạn đến với vùng đất “Hoa vàng trên cỏ xanh”. Nơi đại dương xanh thẳm gặp gỡ núi rừng Trường Sơn để chắt chiu nên những mỹ vị làm say lòng du khách năm châu.',
+        heroCtaPrimary: 'Khám phá 5 đặc sản',
+        heroCtaSecondary: 'Gợi ý lịch trình 24 giờ',
+        stat1Label: 'Tuyệt phẩm di sản',
+        stat2Label: 'Bờ biển & đầm phá nguyên sơ',
+        stat3Label: 'Đánh giá du khách quốc tế',
+        sec1Eyebrow: 'BẢN ĐỒ VỊ GIÁC XỨ NẪU',
+        sec1Title: 'Năm Tinh Hoa Ẩm Thực Nhất Định Phải Thử',
+        sec1Desc: 'Từ đại dương sâu thẳm Tuy Hòa, đầm Ô Loan lộng gió đến cao nguyên Sơn Hòa nắng cháy — mỗi món ăn là một câu chuyện văn hóa bản địa.',
+        filterAll: 'Tất cả (5)',
+        filterSeafood: 'Hải sản đại dương',
+        filterHighland: 'Đặc sản núi rừng',
+        filterStreet: 'Ẩm thực dân dã',
+        searchPlaceholder: 'Tìm món ăn, vùng miền, nguyên liệu...',
+        emptyTitle: 'Không tìm thấy món ăn phù hợp',
+        emptyDesc: 'Hãy thử tìm với từ khóa khác hoặc đặt lại bộ lọc danh mục nhé.',
+        emptyReset: 'Xem tất cả 5 đặc sản',
+        viewDetailsBtn: 'Chi tiết & Hương vị',
+        addToTripBtn: '+ Lưu lịch trình',
+        addedToTripBtn: '✓ Đã lưu',
+        sec2Eyebrow: 'CURATED FOOD TOUR • 24 GIỜ',
+        sec2Title: 'Hành Trình Săn Mỹ Vị Phú Yên Trọn Vẹn',
+        applyRouteBtn: 'Áp dụng lịch trình gợi ý 24h',
+        sec3Eyebrow: 'CẨM NANG DU KHÁCH QUỐC TẾ',
+        sec3Title: 'Bí Quyết Trải Nghiệm Phú Yên Trọn Vẹn',
+        sec3Desc: 'Những thông tin hữu ích giúp chuyến du ngoạn và khám phá ẩm thực Xứ Nẫu của bạn thêm phần đáng nhớ.',
+        guide1Title: 'Thời điểm vàng ghé thăm',
+        guide1Desc: 'Từ tháng 1 đến tháng 8 hằng năm là mùa khô lý tưởng tại Phú Yên. Biển êm, nắng vàng rực rỡ và nguồn hải sản đầm Ô Loan, vịnh Xuân Đài vào mùa tươi ngon nhất.',
+        guide2Title: 'Kết hợp thắng cảnh kỳ vĩ',
+        guide2Desc: 'Đừng quên ghé Gành Đá Đĩa kỳ quan địa chất độc nhất vô nhị, Bãi Xép phim trường “Hoa vàng trên cỏ xanh” và Mũi Điện — nơi đón ánh bình minh đầu tiên trên đất liền Việt Nam.',
+        guide3Title: 'Đặc sản mang về làm quà',
+        guide3Desc: 'Bò một nắng đóng gói hút chân không kèm hũ muối kiến vàng Sơn Hòa, bánh tráng Hòa Đa dẻo thơm hay khô cá ngừ đại dương là những món quà đậm tình Xứ Nẫu dành cho người thân.',
+        footerTagline: 'Hương vị miền biển – Đậm đà bản sắc quê hương Việt Nam.',
+        footerCredit: 'Quảng bá Du lịch & Ẩm thực Phú Yên ra Thế Giới',
+        drawerEyebrow: 'MY CULINARY PASSPORT',
+        drawerTitle: 'Lịch Trình Ẩm Thực Của Tôi',
+        drawerBudgetLabel: 'Chi phí thưởng thức dự kiến:',
+        drawerClearBtn: 'Xóa tất cả',
+        drawerCopyBtn: 'Sao chép lịch trình',
+        drawerEmptyTitle: 'Chưa có món ăn nào trong lịch trình',
+        drawerEmptyDesc: 'Hãy chọn các đặc sản bạn muốn thưởng thức khi đến Phú Yên hoặc nhấn “Áp dụng lịch trình gợi ý 24h”.',
+        modalStoryTitle: 'Câu chuyện & Nghệ thuật chế biến',
+        modalFlavorTitle: 'Biểu đồ tầng hương vị',
+        modalLocalWayTitle: 'Cách ăn chuẩn người Xứ Nẫu',
+        modalSpotTitle: 'Địa chỉ gợi ý & Giá tham khảo',
+        flavorUmami: 'Độ đậm đà (Umami)',
+        flavorRichness: 'Độ béo ngậy',
+        flavorHerbal: 'Hương thảo mộc',
+        flavorSpice: 'Độ cay nồng ấm'
+      },
+      en: {
+        brandSub: 'Xu Nau Culinary Atlas',
+        navSpecialties: '5 Signature Dishes',
+        navItinerary: '24h Tasting Route',
+        navGuide: 'Traveler Guide',
+        navMyTrip: 'My Food Trip',
+        heroEyebrow: 'CENTRAL VIETNAM CULINARY HERITAGE',
+        heroTitle: 'Discover 5 Iconic Specialties of Phu Yen',
+        heroMotto: '“Flavors of the Coast – Rich in Homeland Heritage”',
+        heroDesc: 'Welcome to the “Land of Yellow Flowers on Green Grass.” Where the deep turquoise Pacific meets the Truong Son mountains to craft unforgettable culinary treasures.',
+        heroCtaPrimary: 'Explore the 5 Specialties',
+        heroCtaSecondary: '24-Hour Tasting Route',
+        stat1Label: 'Heritage Masterpieces',
+        stat2Label: 'Pristine Coastline & Lagoons',
+        stat3Label: 'International Traveler Rating',
+        sec1Eyebrow: 'THE XU NAU PALATE MAP',
+        sec1Title: 'Five Culinary Treasures You Must Experience',
+        sec1Desc: 'From Tuy Hoa’s deep-sea fishing fleet and breezy O Loan Lagoon to sun-drenched Son Hoa highlands — every dish tells a living story.',
+        filterAll: 'All (5)',
+        filterSeafood: 'Ocean & Lagoon Seafood',
+        filterHighland: 'Highland Delicacies',
+        filterStreet: 'Local Street Heritage',
+        searchPlaceholder: 'Search dishes, regions, ingredients...',
+        emptyTitle: 'No matching specialties found',
+        emptyDesc: 'Try another keyword or reset the category filters to view all dishes.',
+        emptyReset: 'Show all 5 specialties',
+        viewDetailsBtn: 'Story & Flavor Profile',
+        addToTripBtn: '+ Save to Trip',
+        addedToTripBtn: '✓ Saved',
+        sec2Eyebrow: 'CURATED FOOD TOUR • 24 HOURS',
+        sec2Title: 'A Full-Day Culinary Journey Through Phu Yen',
+        applyRouteBtn: 'Load Suggested 24h Route',
+        sec3Eyebrow: 'INTERNATIONAL VISITOR HANDBOOK',
+        sec3Title: 'Essential Tips for Visiting Phu Yen',
+        sec3Desc: 'Practical insights to make your coastal adventure and culinary exploration seamless and memorable.',
+        guide1Title: 'Golden Season to Visit',
+        guide1Desc: 'January through August brings dry, sunlit skies, calm turquoise seas, and peak freshness for O Loan Lagoon shellfish and ocean tuna.',
+        guide2Title: 'Iconic Landmarks Nearby',
+        guide2Desc: 'Pair your food tour with Ganh Da Dia’s hexagonal basalt columns, Bai Xep’s coastal meadows, and Mui Dien — the first sunrise point on mainland Vietnam.',
+        guide3Title: 'Authentic Culinary Souvenirs',
+        guide3Desc: 'Bring home vacuum-sealed Sun-Dried Beef with wild Weaver Ant Salt, Hoa Da rice paper, or cured ocean tuna as heartfelt gifts.',
+        footerTagline: 'Flavors of the Coast – Rich in Vietnamese Homeland Heritage.',
+        footerCredit: 'Showcasing Phu Yen Gastronomy to the World',
+        drawerEyebrow: 'MY CULINARY PASSPORT',
+        drawerTitle: 'My Phu Yen Food Trip',
+        drawerBudgetLabel: 'Estimated tasting budget:',
+        drawerClearBtn: 'Clear All',
+        drawerCopyBtn: 'Copy Itinerary',
+        drawerEmptyTitle: 'Your tasting list is empty',
+        drawerEmptyDesc: 'Add specialties you want to taste in Phu Yen or load our curated 24-hour itinerary.',
+        modalStoryTitle: 'Cultural Story & Craft',
+        modalFlavorTitle: 'Sensory Flavor Profile',
+        modalLocalWayTitle: 'How to Eat Like a Local',
+        modalSpotTitle: 'Recommended Spots & Reference Price',
+        flavorUmami: 'Savory Umami',
+        flavorRichness: 'Creamy Richness',
+        flavorHerbal: 'Herbal Aroma',
+        flavorSpice: 'Warm Spice'
+      }
+    };
+
+    // 2. DATA FOR THE 5 ICONIC PHU YEN SPECIALTIES
+    const specialties = [
+      {
+        id: 'mat-ca-ngu',
+        number: '01',
+        category: 'seafood',
+        priceVND: 65000,
+        priceDisplayVND: '50.000đ – 80.000đ / thố',
+        priceDisplayUSD: '~$2.50 – $3.20 USD',
+        image: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?auto=format&fit=crop&w=1200&q=85',
+        svgTheme: '#0A3D4C',
+        vi: {
+          name: 'Mắt cá ngừ đại dương',
+          subtitle: 'Đệ nhất mỹ vị đại dương Tuy Hòa',
+          origin: 'TP. Tuy Hòa',
+          categoryLabel: 'Hải sản đại dương',
+          shortDesc: 'Món ăn trứ danh của thủ phủ cá ngừ Việt Nam, được hầm cách thủy trong thố đất cùng thuốc bắc, sả, ớt và lá tía tô tạo nên hương vị béo ngậy, thơm nồng và bổ dưỡng.',
+          story: 'Phú Yên là cái nôi của nghề câu cá ngừ đại dương tại Việt Nam. Từ nguồn nguyên liệu quý giá này, người dân Tuy Hòa đã sáng tạo nên món mắt cá ngừ hầm thuốc bắc trong những chiếc thố đất nung nhỏ. Khi bưng ra bàn, thố vẫn còn sôi lục bục, tỏa hương thảo mộc quyện cùng vị ngọt thanh tự nhiên của biển cả.',
+          localWay: 'Thưởng thức khi còn nóng hổi! Gắp thêm rau tía tô thái chỉ, hành lá, chút ớt xiêm xanh và chấm kèm muối tiêu chanh hoặc nước mắm ớt tỏi, ăn cùng bánh đa nướng giòn rụm.',
+          spot: 'Quán Bà Tám (289 Lê Duẩn, TP. Tuy Hòa) • Quán Sơn Cầu Gỗ (Bờ kè Bạch Đằng)'
+        },
+        en: {
+          name: 'Ocean Tuna Eye Stew',
+          subtitle: 'Tuy Hoa’s signature deep-sea delicacy',
+          origin: 'Tuy Hoa City',
+          categoryLabel: 'Ocean Seafood',
+          shortDesc: 'Phu Yen’s most famous culinary invention: wild ocean tuna eye slow-simmered in individual clay pots with Chinese medicinal herbs, lemongrass, chili, and fresh perilla.',
+          story: 'As Vietnam’s capital of ocean tuna fishing, Tuy Hoa transformed this prized catch into an unforgettable gourmet experience. Served bubbling hot in rustic earthenware pots, the rich, collagen-dense delicacy melts effortlessly while aromatic herbs balance the deep oceanic sweetness.',
+          localWay: 'Stir in freshly shredded purple perilla leaves, scallions, and bird’s-eye chili while piping hot, accompanied by crispy toasted sesame rice crackers.',
+          spot: 'Ba Tam Restaurant (289 Le Duan St, Tuy Hoa) • Son Cau Go (Bach Dang Embankment)'
+        },
+        flavors: { umami: 95, richness: 92, herbal: 88, spice: 65 }
+      },
+      {
+        id: 'bo-mot-nang',
+        number: '02',
+        category: 'highland',
+        priceVND: 150000,
+        priceDisplayVND: '120.000đ – 180.000đ / phần',
+        priceDisplayUSD: '~$5.00 – $7.50 USD',
+        image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=85',
+        svgTheme: '#D47538',
+        vi: {
+          name: 'Bò một nắng muối kiến vàng',
+          subtitle: 'Tinh hoa nắng gió cao nguyên Sơn Hòa',
+          origin: 'Huyện Sơn Hòa',
+          categoryLabel: 'Đặc sản núi rừng',
+          shortDesc: 'Thịt bò tơ chăn thả tự nhiên tẩm ướp gia vị, phơi đúng một nắng giòn miền Trung rồi nướng trên than hồng, chấm cùng muối kiến vàng chua thanh độc bản.',
+          story: 'Từ vùng bán sơn địa Sơn Hòa đầy nắng gió, những thớ thịt thăn và bắp bò tơ tươi ngon được thái bản vừa ăn, ướp cùng sả, ớt, tiêu rừng rồi phơi dưới cái nắng gắt đúng một ngày để bên ngoài se lại nhưng bên trong vẫn giữ trọn độ ngọt mềm. Linh hồn của món ăn chính là chén muối kiến vàng làm từ tổ kiến trên cây rừng, mang vị chua thanh tự nhiên không loại chanh nào sánh được.',
+          localWay: 'Nướng miếng bò trên bếp than hồng cho đến khi xém cạnh, dùng chày gỗ đập nhẹ cho mềm tơi, xé dọc thớ thịt và chấm đẫm muối kiến vàng kèm lá é trắng, dưa leo.',
+          spot: 'Đặc sản Diệp Bảo An (TP. Tuy Hòa) • Các quán nướng đặc sản dọc đường Hùng Vương'
+        },
+        en: {
+          name: 'Sun-Dried Beef with Weaver Ant Salt',
+          subtitle: 'Highland sun & forest craft of Son Hoa',
+          origin: 'Son Hoa Highlands',
+          categoryLabel: 'Highland Delicacy',
+          shortDesc: 'Free-range mountain beef marinated in lemongrass and wild pepper, cured under one intense day of Phu Yen sun, charcoal-grilled, and paired with tangy wild weaver ant salt.',
+          story: 'Originating from the sun-drenched hills of Son Hoa, tender cuts of pasture-raised beef are cured under a single day of fierce coastal sunshine—sealing in moisture while concentrating savory depth. Its iconic companion, Muoi Kien Vang, is harvested from wild forest weaver ants, delivering an electric, citrus-like tartness.',
+          localWay: 'Grill over glowing charcoal until lightly charred, pound gently to tenderize, tear along the grain, and dip generously into weaver ant salt with fresh lemon basil.',
+          spot: 'Diep Bao An Specialty House (Tuy Hoa) • Hung Vuong Boulevard Grill Houses'
+        },
+        flavors: { umami: 94, richness: 75, herbal: 70, spice: 82 }
+      },
+      {
+        id: 'so-huyet-o-loan',
+        number: '03',
+        category: 'seafood',
+        priceVND: 110000,
+        priceDisplayVND: '90.000đ – 130.000đ / đĩa',
+        priceDisplayUSD: '~$3.80 – $5.50 USD',
+        image: 'https://images.unsplash.com/photo-1559737558-2f5a35f4523b?auto=format&fit=crop&w=1200&q=85',
+        svgTheme: '#13576B',
+        vi: {
+          name: 'Sò huyết đầm Ô Loan',
+          subtitle: 'Ngọc quý từ đầm nước lợ danh thắng quốc gia',
+          origin: 'Đầm Ô Loan • Tuy An',
+          categoryLabel: 'Hải sản đầm phá',
+          shortDesc: 'Sò huyết đầm Ô Loan nổi tiếng khắp cả nước nhờ con to mập, thịt đỏ au, vị ngọt đậm đà và béo ngậy vượt trội nhờ nguồn nước lợ giao hòa giữa sông và biển.',
+          story: 'Nằm ngay dưới chân đèo Quán Cau trên đường đi Gành Đá Đĩa, đầm Ô Loan là thắng cảnh cấp quốc gia rộng hơn 1.500 ha. Nhờ dòng chảy đặc biệt hòa quyện giữa nước ngọt từ núi đổ về và nước mặn từ biển Đông, sò huyết tại đây có kích thước lớn, thịt dày căng mọng và giàu dinh dưỡng bậc nhất Việt Nam.',
+          localWay: 'Ngon nhất là sò huyết nướng mọi vừa chín tới giữ nguyên nước ngọt bên trong, hoặc nướng mỡ hành đậu phộng rang thơm lừng, chấm muối tiêu xanh.',
+          spot: 'Các nhà hàng bè nổi Cầu An Hải (Đầm Ô Loan, huyện Tuy An)'
+        },
+        en: {
+          name: 'O Loan Lagoon Blood Cockles',
+          subtitle: 'Prized shellfish from a national scenic lagoon',
+          origin: 'O Loan Lagoon • Tuy An',
+          categoryLabel: 'Lagoon Seafood',
+          shortDesc: 'Renowned across Vietnam for their plump size, vibrant ruby flesh, and extraordinary sweetness nurtured by the brackish waters of historic O Loan Lagoon.',
+          story: 'Nestled beneath Quan Cau Pass on the coastal road to Ganh Da Dia, O Loan Lagoon blends freshwater mountain streams with Pacific tides. This unique ecosystem yields blood cockles celebrated for centuries as a royal tribute delicacy—plump, briny-sweet, and remarkably succulent.',
+          localWay: 'Best enjoyed lightly charcoal-grilled in the shell to preserve their sweet natural juices, or topped with fragrant scallion oil and crushed roasted peanuts.',
+          spot: 'Floating Lagoon Restaurants at An Hai Bridge (O Loan Lagoon, Tuy An)'
+        },
+        flavors: { umami: 96, richness: 84, herbal: 60, spice: 55 }
+      },
+      {
+        id: 'banh-canh-he',
+        number: '04',
+        category: 'street',
+        priceVND: 35000,
+        priceDisplayVND: '25.000đ – 40.000đ / tô',
+        priceDisplayUSD: '~$1.00 – $1.65 USD',
+        image: 'https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=1200&q=85',
+        svgTheme: '#4A7C6F',
+        vi: {
+          name: 'Bánh canh hẹ Phú Yên',
+          subtitle: 'Sắc xanh ngọc bích trong từng tô điểm tâm Xứ Nẫu',
+          origin: 'TP. Tuy Hòa',
+          categoryLabel: 'Ẩm thực dân dã',
+          shortDesc: 'Sợi bánh canh gạo mềm mượt chan nước dùng cá biển thanh ngọt, phủ đầy chả cá chiên vàng ươm, trứng cút và một lớp hẹ xanh thái nhuyễn thơm lừng bắt mắt.',
+          story: 'Nếu muốn cảm nhận nhịp sống buổi sáng bình yên của người Phú Yên, hãy ghé một quán bánh canh hẹ bên góc phố Tuy Hòa. Điều làm nên dấu ấn khó quên chính là lớp lá hẹ sẻ xanh mướt phủ kín mặt tô—vừa tạo màu sắc rực rỡ, vừa khử mùi tanh hải sản và mang lại vị thơm dịu nhẹ đầy tinh tế.',
+          localWay: 'Vắt thêm lát chanh tươi, cho chút ớt xay Xứ Nẫu, trộn đều để lớp hẹ xanh hòa quyện vào nước dùng cá ngọt thanh và thưởng thức cùng chả cá dai giòn.',
+          spot: 'Bánh canh hẹ Thành Tâm (53 Điện Biên Phủ) • Quán Bưu Điện (Lê Thánh Tôn, Tuy Hòa)'
+        },
+        en: {
+          name: 'Emerald Chive Rice Noodle Soup',
+          subtitle: 'Tuy Hoa’s iconic jade-green comfort bowl',
+          origin: 'Tuy Hoa City',
+          categoryLabel: 'Street Heritage',
+          shortDesc: 'Silky handcrafted rice noodles in a clear, sweet coastal fish broth, crowned with golden fried fish cakes, quail eggs, and a vibrant blanket of finely snipped green chives.',
+          story: 'Nothing captures morning life in Tuy Hoa quite like a steaming bowl of Banh Canh He. Generously blanketed in fragrant local chives, the dish balances delicate sweetness from simmered ocean fish with savory, bouncy coastal fish cakes.',
+          localWay: 'Squeeze in fresh calamansi lime, add a touch of local chili paste, and swirl the emerald chives into the hot broth before savoring each spoonful.',
+          spot: 'Thanh Tam Banh Canh He (53 Dien Bien Phu St) • Buu Dien Stall (Le Thanh Ton, Tuy Hoa)'
+        },
+        flavors: { umami: 85, richness: 62, herbal: 95, spice: 45 }
+      },
+      {
+        id: 'cha-dong',
+        number: '05',
+        category: 'street',
+        priceVND: 70000,
+        priceDisplayVND: '55.000đ – 85.000đ / phần',
+        priceDisplayUSD: '~$2.30 – $3.50 USD',
+        image: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?auto=format&fit=crop&w=1200&q=85',
+        svgTheme: '#B55D24',
+        vi: {
+          name: 'Chả dông Phú Yên',
+          subtitle: 'Mỹ vị giòn rụm từ vùng đồi cát ven biển',
+          origin: 'TP. Tuy Hòa',
+          categoryLabel: 'Ẩm thực dân dã',
+          shortDesc: 'Đặc sản độc đáo chế biến từ thịt dông cát săn chắc băm nhuyễn cùng nấm mèo, miến dong, hành tím và tiêu, cuốn bánh tráng mỏng chiên vàng giòn rụm.',
+          story: 'Dông là loài sinh vật sống trên các triền cát trắng ven biển miền Trung, thịt trắng, ngọt thanh và săn chắc như thịt gà đồi. Người Phú Yên khéo léo băm nhuyễn thịt dông với mộc nhĩ, gia vị đặc trưng rồi cuốn thành từng cuốn chả nhỏ bằng bánh tráng gạo, chiên ngập dầu đến khi lớp vỏ vàng ruộm, giòn tan.',
+          localWay: 'Cuốn chả dông nóng hổi cùng bánh tráng mỏng, rau sống tươi mát (xà lách, húng quế, diếp cá, dưa leo) và chấm vào chén nước mắm tỏi ớt chua ngọt sánh mịn.',
+          spot: 'Chả dông Nguyễn Công Trứ (92 Nguyễn Công Trứ, TP. Tuy Hòa)'
+        },
+        en: {
+          name: 'Crispy Sand Lizard Spring Rolls',
+          subtitle: 'Golden coastal crunch from Phu Yen’s sand dunes',
+          origin: 'Tuy Hoa City',
+          categoryLabel: 'Street Heritage',
+          shortDesc: 'A rare coastal specialty made from lean sand-dune dong meat minced with wood ear mushrooms, glass noodles, shallots, and pepper, wrapped in thin rice paper and fried crisp.',
+          story: 'Inhabiting the sun-warmed coastal sand dunes of Phu Yen, wild dong offers lean, delicate white meat prized by locals. Minced with aromatic shallots, black pepper, and wood ear mushrooms, each roll is hand-wrapped in delicate rice paper and fried until blistered and golden.',
+          localWay: 'Wrap a hot, crispy roll inside soft rice paper with fresh garden herbs, lettuce, and cucumber, then dip into sweet-tangy garlic chili fish sauce.',
+          spot: 'Cha Dong Nguyen Cong Tru (92 Nguyen Cong Tru St, Tuy Hoa City)'
+        },
+        flavors: { umami: 88, richness: 76, herbal: 74, spice: 60 }
+      }
+    ];
+
+    // 3. 24-HOUR SUGGESTED ITINERARY TIMELINE DATA
+    const timelineStops = [
+      {
+        time: '07:30',
+        dishId: 'banh-canh-he',
+        vi: { period: 'Bữa Sáng Thanh Tao', note: 'Khởi đầu ngày mới tại trung tâm Tuy Hòa với tô bánh canh hẹ xanh mướt nóng hổi.' },
+        en: { period: 'Morning Awakening', note: 'Start your morning in central Tuy Hoa with a steaming bowl of emerald chive noodle soup.' }
+      },
+      {
+        time: '11:30',
+        dishId: 'so-huyet-o-loan',
+        vi: { period: 'Bữa Trưa Bên Đầm Phá', note: 'Ghé nhà hàng bè nổi đầm Ô Loan thưởng thức sò huyết nướng mỡ hành sau khi thăm Gành Đá Đĩa.' },
+        en: { period: 'Lagoon Lunch', note: 'Dine over the water at O Loan Lagoon on plump blood cockles after exploring Ganh Da Dia.' }
+      },
+      {
+        time: '16:30',
+        dishId: 'cha-dong',
+        vi: { period: 'Quà Chiều Xứ Nẫu', note: 'Dạo biển Tuy Hòa lộng gió và thưởng thức mẹt chả dông cuốn bánh tráng rau sống giòn tan.' },
+        en: { period: 'Afternoon Street Bite', note: 'Stroll the Tuy Hoa promenade and enjoy crisp sand-dune spring rolls wrapped with fresh herbs.' }
+      },
+      {
+        time: '19:30',
+        dishId: 'mat-ca-ngu',
+        secondaryDishId: 'bo-mot-nang',
+        vi: { period: 'Dạ Tiệc Tinh Hoa', note: 'Kết thúc hành trình với thố mắt cá ngừ đại dương hầm thuốc bắc và bò một nắng muối kiến vàng.' },
+        en: { period: 'Evening Feast', note: 'Celebrate the night with clay-pot ocean tuna eye stew and charcoal-grilled sun-dried beef.' }
+      }
+    ];
+
+    // 4. APPLICATION STATE
+    let currentLang = 'vi';
+    let currentFilter = 'all';
+    let searchQuery = '';
+    let savedTripIds = ['mat-ca-ngu', 'banh-canh-he']; // Pre-seeded with 2 favorites so user immediately sees how it works
+
+    // 5. CUSTOM INLINE SVG ARTWORK GENERATOR (Zero-broken-image guarantee!)
+    function getCulinaryArtworkSVG(themeColor, numberLabel) {
+      return `
+        <div class="hidden w-full h-full flex flex-col items-center justify-center p-6 text-white relative overflow-hidden" style="background: linear-gradient(135deg, ${themeColor}, #062833);">
+          <svg class="w-24 h-24 opacity-90 mb-2" viewBox="0 0 80 80" fill="none" stroke="currentColor" stroke-width="1.6">
+            <circle cx="40" cy="40" r="32" stroke-dasharray="4 4" opacity="0.45"/>
+            <path d="M16 44c0 11 10.7 18 24 18s24-7 24-18H16z" fill="rgba(255,255,255,0.12)"/>
+            <path d="M24 34c2-4 5-4 7 0s5 4 7 0 5-4 7 0 5 4 7 0" stroke-linecap="round"/>
+            <circle cx="40" cy="22" r="4" fill="#D47538" stroke="none"/>
+          </svg>
+          <span class="font-serif italic text-xs tracking-widest uppercase text-amber-200">Phú Yên Culinary Art • #${numberLabel}</span>
+        </div>
+      `;
+    }
+
+    // 6. RENDER DISH CARDS
+    function renderDishes() {
+      const grid = document.getElementById('dishesGrid');
+      const emptyState = document.getElementById('emptyState');
+      const t = i18n[currentLang];
+
+      const filtered = specialties.filter((item) => {
+        const matchesCat = currentFilter === 'all' || item.category === currentFilter;
+        const localized = item[currentLang];
+        const q = searchQuery.trim().toLowerCase();
+        const matchesSearch =
+          !q ||
+          localized.name.toLowerCase().includes(q) ||
+          localized.origin.toLowerCase().includes(q) ||
+          localized.shortDesc.toLowerCase().includes(q) ||
+          localized.subtitle.toLowerCase().includes(q);
+        return matchesCat && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+      grid.innerHTML = filtered
+        .map((dish) => {
+          const content = dish[currentLang];
+          const isSaved = savedTripIds.includes(dish.id);
+          return `
+            <article class="dish-card bg-white border border-hairline rounded-3xl overflow-hidden shadow-editorial hover:shadow-cardHover transition-all duration-300 flex flex-col justify-between group">
+              <div>
+                <!-- Visual Header -->
+                <div class="relative h-60 overflow-hidden bg-ocean">
+                  <img
+                    src="${dish.image}"
+                    alt="${content.name}"
+                    class="dish-img w-full h-full object-cover"
+                    loading="lazy"
+                    onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
+                  />
+                  ${getCulinaryArtworkSVG(dish.svgTheme, dish.number)}
+
+                  <!-- Editorial Number Badge -->
+                  <div class="absolute top-4 left-4 w-10 h-10 rounded-2xl bg-ocean/90 backdrop-blur-md text-amber-300 font-serif font-bold text-base flex items-center justify-center border border-white/15 shadow">
+                    ${dish.number}
+                  </div>
+
+                  <!-- Origin Pill -->
+                  <div class="absolute top-4 right-4 px-3 py-1.5 rounded-full bg-white/92 backdrop-blur-md text-ocean text-xs font-semibold shadow-sm flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-terracotta"></span>
+                    ${content.origin}
+                  </div>
+
+                  <!-- Category Bottom Tag -->
+                  <div class="absolute bottom-3 left-4 px-3 py-1 rounded-full bg-ocean-dark/80 backdrop-blur-xs text-white text-[11px] uppercase tracking-wider font-medium">
+                    ${content.categoryLabel}
+                  </div>
+                </div>
+
+                <!-- Card Body -->
+                <div class="p-6 sm:p-7">
+                  <div class="text-xs font-medium text-terracotta mb-1.5">${content.subtitle}</div>
+                  <h3 class="font-serif text-2xl font-bold text-ocean group-hover:text-terracotta transition-colors mb-3 leading-snug">
+                    ${content.name}
+                  </h3>
+                  <p class="text-sm text-slateMuted leading-relaxed line-clamp-3">
+                    ${content.shortDesc}
+                  </p>
+                </div>
+              </div>
+
+              <!-- Card Footer Actions -->
+              <div class="px-6 sm:px-7 pb-6 pt-3 border-t border-hairline/70 flex items-center justify-between gap-2">
+                <button
+                  onclick="openDishModal('${dish.id}')"
+                  class="text-xs sm:text-sm font-semibold text-ocean hover:text-terracotta inline-flex items-center gap-1.5 py-2 transition-colors"
+                >
+                  <span>${t.viewDetailsBtn}</span>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </button>
+
+                <button
+                  onclick="toggleTripItem('${dish.id}')"
+                  class="px-3.5 py-2 rounded-full text-xs font-semibold transition-all active:scale-95 ${
+                    isSaved
+                      ? 'bg-sage text-white shadow-xs'
+                      : 'bg-sand hover:bg-terracotta text-ocean hover:text-white border border-hairline'
+                  }"
+                >
+                  ${isSaved ? t.addedToTripBtn : t.addToTripBtn}
+                </button>
+              </div>
+            </article>
+          `;
+        })
+        .join('');
+    }
+
+    // 7. RENDER 24-HOUR TIMELINE
+    function renderTimeline() {
+      const container = document.getElementById('timelineGrid');
+      container.innerHTML = timelineStops
+        .map((stop) => {
+          const primary = specialties.find((d) => d.id === stop.dishId);
+          const secondary = stop.secondaryDishId ? specialties.find((d) => d.id === stop.secondaryDishId) : null;
+          const localizedStop = stop[currentLang];
+          const dishTitle = secondary
+            ? `${primary[currentLang].name} & ${secondary[currentLang].name}`
+            : primary[currentLang].name;
+
+          return `
+            <div class="bg-white/10 backdrop-blur-md border border-white/15 rounded-3xl p-6 flex flex-col justify-between hover:bg-white/15 transition-all">
+              <div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-terracotta text-white text-xs font-bold tracking-wider mb-4">
+                  <span>${stop.time}</span>
+                  <span>•</span>
+                  <span>${localizedStop.period}</span>
+                </div>
+                <h3 class="font-serif text-xl font-bold text-amber-200 mb-2 leading-snug">${dishTitle}</h3>
+                <p class="text-sm text-slate-200/90 leading-relaxed">${localizedStop.note}</p>
+              </div>
+              <button
+                onclick="openDishModal('${primary.id}')"
+                class="mt-6 text-xs font-semibold uppercase tracking-wider text-amber-300 hover:text-white inline-flex items-center gap-1.5 transition-colors"
+              >
+                <span>${i18n[currentLang].viewDetailsBtn}</span>
+                <span>→</span>
+              </button>
+            </div>
+          `;
+        })
+        .join('');
+    }
+
+    // 8. DISH DETAIL MODAL LOGIC
+    function openDishModal(dishId) {
+      const dish = specialties.find((d) => d.id === dishId);
+      if (!dish) return;
+      const content = dish[currentLang];
+      const t = i18n[currentLang];
+      const isSaved = savedTripIds.includes(dish.id);
+
+      const modalBody = document.getElementById('modalBody');
+      modalBody.innerHTML = `
+        <!-- Top Hero Image -->
+        <div class="relative h-64 sm:h-80 bg-ocean overflow-hidden">
+          <img
+            src="${dish.image}"
+            alt="${content.name}"
+            class="w-full h-full object-cover"
+            onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
+          />
+          ${getCulinaryArtworkSVG(dish.svgTheme, dish.number)}
+          <div class="absolute inset-0 bg-gradient-to-t from-ocean-dark/90 via-ocean-dark/30 to-transparent"></div>
+          <div class="absolute bottom-6 left-6 right-6 text-white">
+            <div class="flex flex-wrap items-center gap-2 mb-2">
+              <span class="px-3 py-1 rounded-full bg-terracotta text-xs font-bold uppercase tracking-wider">${content.origin}</span>
+              <span class="px-3 py-1 rounded-full bg-white/20 backdrop-blur-xs text-xs font-medium">${content.categoryLabel}</span>
+            </div>
+            <h2 class="font-serif text-3xl sm:text-4xl font-bold leading-tight">${content.name}</h2>
+            <p class="text-amber-200 italic font-serif text-base sm:text-lg mt-1">${content.subtitle}</p>
+          </div>
+        </div>
+
+        <!-- Detailed Content -->
+        <div class="p-6 sm:p-8 space-y-7">
+          <!-- Cultural Story -->
+          <div>
+            <h4 class="text-xs font-bold uppercase tracking-[0.2em] text-terracotta mb-2">${t.modalStoryTitle}</h4>
+            <p class="text-slateDeep text-sm sm:text-base leading-relaxed">${content.story}</p>
+          </div>
+
+          <!-- Sensory Flavor Profile Bars -->
+          <div class="bg-sand border border-hairline rounded-2xl p-5 sm:p-6">
+            <h4 class="text-xs font-bold uppercase tracking-[0.2em] text-ocean mb-4">${t.modalFlavorTitle}</h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              ${renderFlavorBar(t.flavorUmami, dish.flavors.umami, 'bg-ocean')}
+              ${renderFlavorBar(t.flavorRichness, dish.flavors.richness, 'bg-terracotta')}
+              ${renderFlavorBar(t.flavorHerbal, dish.flavors.herbal, 'bg-sage')}
+              ${renderFlavorBar(t.flavorSpice, dish.flavors.spice, 'bg-amber-600')}
+            </div>
+          </div>
+
+          <!-- How to eat like a local + Recommended Spots -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div class="p-5 rounded-2xl border border-hairline bg-white">
+              <h4 class="font-serif text-lg font-bold text-ocean mb-2 flex items-center gap-2">
+                <span class="text-terracotta">✦</span> ${t.modalLocalWayTitle}
+              </h4>
+              <p class="text-sm text-slateMuted leading-relaxed">${content.localWay}</p>
+            </div>
+
+            <div class="p-5 rounded-2xl border border-hairline bg-white">
+              <h4 class="font-serif text-lg font-bold text-ocean mb-2 flex items-center gap-2">
+                <span class="text-sage">📍</span> ${t.modalSpotTitle}
+              </h4>
+              <p class="text-sm text-slateDeep font-medium mb-2">${content.spot}</p>
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sand text-xs font-semibold text-ocean">
+                <span>${dish.priceDisplayVND}</span>
+                <span class="text-slateMuted">(${dish.priceDisplayUSD})</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Bar -->
+          <div class="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-hairline">
+            <div class="text-xs text-slateMuted">
+              Phú Yên Culinary Atlas • #${dish.number}
+            </div>
+            <button
+              onclick="toggleTripItem('${dish.id}'); openDishModal('${dish.id}')"
+              class="w-full sm:w-auto px-6 py-3 rounded-full text-sm font-semibold transition-all ${
+                isSaved
+                  ? 'bg-sage text-white'
+                  : 'bg-terracotta hover:bg-terracotta-light text-white shadow-md'
+              }"
+            >
+              ${isSaved ? t.addedToTripBtn : t.addToTripBtn}
+            </button>
+          </div>
+        </div>
+      `;
+
+      const modal = document.getElementById('dishModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function renderFlavorBar(label, value, colorClass) {
+      return `
+        <div>
+          <div class="flex justify-between text-xs font-semibold text-slateDeep mb-1.5">
+            <span>${label}</span>
+            <span class="text-slateMuted">${value}%</span>
+          </div>
+          <div class="w-full h-2 bg-white rounded-full overflow-hidden border border-hairline">
+            <div class="flavor-fill h-full ${colorClass} rounded-full" style="width: ${value}%"></div>
+          </div>
+        </div>
+      `;
+    }
+
+    function closeDishModal() {
+      const modal = document.getElementById('dishModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    // Close modal on backdrop click or Escape key
+    document.getElementById('dishModal').addEventListener('click', (e) => {
+      if (e.target.id === 'dishModal') closeDishModal();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeDishModal();
+        toggleTripDrawer(false);
+      }
+    });
+
+    // 9. FILTER & SEARCH HANDLERS
+    function setFilter(category) {
+      currentFilter = category;
+      document.querySelectorAll('.filter-btn').forEach((btn) => {
+        if (btn.dataset.filter === category) {
+          btn.className = 'filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-ocean text-white';
+        } else {
+          btn.className = 'filter-btn px-4 py-2 rounded-full text-xs sm:text-sm font-medium transition-all bg-sand text-slateDeep hover:bg-ocean/10';
+        }
+      });
+      renderDishes();
+    }
+
+    function handleSearch(val) {
+      searchQuery = val;
+      renderDishes();
+    }
+
+    function resetFilters() {
+      currentFilter = 'all';
+      searchQuery = '';
+      document.getElementById('searchInput').value = '';
+      setFilter('all');
+    }
+
+    // 10. MY FOOD TRIP DRAWER & ITINERARY MANAGEMENT
+    function toggleTripItem(dishId) {
+      const dish = specialties.find((d) => d.id === dishId);
+      if (!dish) return;
+      const idx = savedTripIds.indexOf(dishId);
+      if (idx === -1) {
+        savedTripIds.push(dishId);
+        showToast(
+          currentLang === 'vi'
+            ? `Đã thêm "${dish.vi.name}" vào lịch trình!`
+            : `Added "${dish.en.name}" to your Food Trip!`
+        );
+      } else {
+        savedTripIds.splice(idx, 1);
+        showToast(
+          currentLang === 'vi'
+            ? `Đã gỡ "${dish.vi.name}" khỏi lịch trình.`
+            : `Removed "${dish.en.name}" from your Food Trip.`
+        );
+      }
+      updateTripUI();
+      renderDishes();
+    }
+
+    function loadSuggestedRoute() {
+      savedTripIds = specialties.map((d) => d.id);
+      updateTripUI();
+      renderDishes();
+      toggleTripDrawer(true);
+      showToast(
+        currentLang === 'vi'
+          ? 'Đã áp dụng trọn bộ lịch trình 5 đặc sản Phú Yên 24h!'
+          : 'Loaded all 5 Phu Yen specialties into your 24h Food Trip!'
+      );
+    }
+
+    function clearTrip() {
+      savedTripIds = [];
+      updateTripUI();
+      renderDishes();
+      showToast(currentLang === 'vi' ? 'Đã làm trống lịch trình.' : 'Cleared your Food Trip.');
+    }
+
+    function toggleTripDrawer(open) {
+      const drawer = document.getElementById('tripDrawer');
+      const overlay = document.getElementById('tripDrawerOverlay');
+      if (open) {
+        overlay.classList.remove('hidden');
+        drawer.classList.remove('translate-x-full');
+        document.body.style.overflow = 'hidden';
+      } else {
+        overlay.classList.add('hidden');
+        drawer.classList.add('translate-x-full');
+        document.body.style.overflow = '';
+      }
+    }
+
+    function updateTripUI() {
+      const badge = document.getElementById('tripBadge');
+      const container = document.getElementById('tripListContainer');
+      const totalVNDEl = document.getElementById('totalBudgetVND');
+      const totalUSDEl = document.getElementById('totalBudgetUSD');
+      const t = i18n[currentLang];
+
+      badge.textContent = savedTripIds.length;
+
+      if (savedTripIds.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-14 px-4 bg-white rounded-3xl border border-hairline">
+            <div class="w-12 h-12 rounded-full bg-sand text-ocean mx-auto flex items-center justify-center mb-3 font-serif text-xl">✦</div>
+            <h4 class="font-serif text-lg font-bold text-ocean mb-1.5">${t.drawerEmptyTitle}</h4>
+            <p class="text-xs text-slateMuted leading-relaxed">${t.drawerEmptyDesc}</p>
+          </div>
+        `;
+        totalVNDEl.textContent = '0 đ';
+        totalUSDEl.textContent = '~$0.00 USD';
+        return;
+      }
+
+      let totalVND = 0;
+      container.innerHTML = savedTripIds
+        .map((id, index) => {
+          const dish = specialties.find((d) => d.id === id);
+          if (!dish) return '';
+          totalVND += dish.priceVND;
+          const content = dish[currentLang];
+          return `
+            <div class="bg-white border border-hairline rounded-2xl p-4 flex items-center justify-between gap-3 shadow-xs">
+              <div class="flex items-center gap-3 min-w-0">
+                <div class="w-8 h-8 rounded-xl bg-ocean text-amber-300 font-serif font-bold text-xs flex items-center justify-center shrink-0">
+                  0${index + 1}
+                </div>
+                <div class="min-w-0">
+                  <h5 class="font-serif font-bold text-ocean text-base truncate">${content.name}</h5>
+                  <p class="text-xs text-slateMuted truncate">${content.origin} • ${dish.priceDisplayVND}</p>
+                </div>
+              </div>
+              <button
+                onclick="toggleTripItem('${dish.id}')"
+                aria-label="Remove"
+                class="w-8 h-8 rounded-full hover:bg-red-50 text-slateMuted hover:text-red-600 flex items-center justify-center shrink-0 transition-colors"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+          `;
+        })
+        .join('');
+
+      totalVNDEl.textContent = totalVND.toLocaleString('vi-VN') + ' đ';
+      const approxUSD = (totalVND / 25000).toFixed(2);
+      totalUSDEl.textContent = `~$${approxUSD} USD`;
+    }
+
+    function copyItinerary() {
+      if (savedTripIds.length === 0) {
+        showToast(currentLang === 'vi' ? 'Lịch trình đang trống!' : 'Your itinerary is empty!');
+        return;
+      }
+
+      const header =
+        currentLang === 'vi'
+          ? '🌊 LỊCH TRÌNH KHÁM PHÁ ẨM THỰC PHÚ YÊN (XỨ NẪU):\n'
+          : '🌊 MY PHU YEN CULINARY ITINERARY (VIETNAM):\n';
+
+      const lines = savedTripIds.map((id, i) => {
+        const d = specialties.find((item) => item.id === id);
+        const c = d[currentLang];
+        return `${i + 1}. ${c.name} (${c.origin}) - ${d.priceDisplayVND}`;
+      });
+
+      const fullText = header + lines.join('\n');
+
+      // Reliable clipboard copy using hidden textarea + execCommand('copy')
+      const tempArea = document.createElement('textarea');
+      tempArea.value = fullText;
+      tempArea.style.position = 'fixed';
+      tempArea.style.opacity = '0';
+      document.body.appendChild(tempArea);
+      tempArea.select();
+      try {
+        document.execCommand('copy');
+        showToast(
+          currentLang === 'vi'
+            ? 'Đã sao chép lịch trình để chia sẻ với bạn bè!'
+            : 'Itinerary copied to clipboard!'
+        );
+      } catch (err) {
+        showToast(currentLang === 'vi' ? 'Không thể sao chép tự động.' : 'Unable to copy automatically.');
+      }
+      document.body.removeChild(tempArea);
+    }
+
+    // 11. BILINGUAL SWITCHER (VI / EN)
+    function setLanguage(lang) {
+      currentLang = lang;
+      document.documentElement.lang = lang;
+
+      const btnVI = document.getElementById('btnLangVI');
+      const btnEN = document.getElementById('btnLangEN');
+
+      if (lang === 'vi') {
+        btnVI.className = 'px-2.5 py-1 rounded-full text-xs font-semibold transition-all bg-ocean text-white';
+        btnEN.className = 'px-2.5 py-1 rounded-full text-xs font-semibold transition-all text-slateMuted hover:text-ocean';
+      } else {
+        btnEN.className = 'px-2.5 py-1 rounded-full text-xs font-semibold transition-all bg-ocean text-white';
+        btnVI.className = 'px-2.5 py-1 rounded-full text-xs font-semibold transition-all text-slateMuted hover:text-ocean';
+      }
+
+      // Translate all static data-i18n nodes
+      document.querySelectorAll('[data-i18n]').forEach((el) => {
+        const key = el.getAttribute('data-i18n');
+        if (i18n[lang][key]) {
+          el.textContent = i18n[lang][key];
+        }
+      });
+
+      document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+        const key = el.getAttribute('data-i18n-placeholder');
+        if (i18n[lang][key]) {
+          el.setAttribute('placeholder', i18n[lang][key]);
+        }
+      });
+
+      renderDishes();
+      renderTimeline();
+      updateTripUI();
+    }
+
+    // 12. TOAST HELPER
+    let toastTimeout;
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMessage');
+      toastMsg.textContent = msg;
+      toast.classList.remove('opacity-0', 'translate-y-4');
+      toast.classList.add('opacity-100', 'translate-y-0');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-4');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 2800);
+    }
+
+    // 13. SCROLL REVEAL OBSERVER & INITIALIZATION
+    window.addEventListener('DOMContentLoaded', () => {
+      renderDishes();
+      renderTimeline();
+      updateTripUI();
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.12 }
+      );
+
+      document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+    });
+  </script>
+</body>
+</html>
