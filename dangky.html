@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Đăng Ký Hội Viên — PHÚ YÊN Tinh Hoa Ẩm Thực Xứ Nẫu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,500&display=swap" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Be Vietnam Pro', sans-serif;
+      background: #FAF7F2;
+      color: #1E293B;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Thanh điều hướng đồng bộ 6 trang */
+    .py-topbar {
+      background: #062833;
+      color: #E2E8F0;
+      font-size: 13px;
+      padding: 9px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .py-topbar-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .py-nav-group { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+    .py-link {
+      color: #CBD5E1;
+      text-decoration: none;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+    .py-link:hover { background: rgba(255,255,255,0.12); color: #fff; }
+    .py-link.active { background: #D47538; color: #fff; font-weight: 600; }
+    .py-lang-btn {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    /* Khung chính trang đăng ký */
+    .reg-wrapper {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 34px 16px;
+    }
+    .reg-card {
+      max-width: 980px;
+      width: 100%;
+      background: #FFFFFF;
+      border-radius: 24px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 0.95fr 1.15fr;
+      box-shadow: 0 24px 50px rgba(10, 61, 76, 0.12);
+      border: 1px solid #E8E0D5;
+    }
+    @media (max-width: 820px) {
+      .reg-card { grid-template-columns: 1fr; }
+    }
+
+    /* Cột trái: Giới thiệu đặc quyền hội viên */
+    .reg-banner {
+      background: linear-gradient(155deg, #0A3D4C 0%, #062833 100%);
+      color: #FFFFFF;
+      padding: 42px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .brand-pill {
+      display: inline-block;
+      background: rgba(212, 117, 56, 0.22);
+      color: #FDBA74;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 18px;
+      width: fit-content;
+    }
+    .reg-banner h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 31px;
+      line-height: 1.25;
+      margin-bottom: 14px;
+    }
+    .reg-banner p {
+      font-size: 14px;
+      line-height: 1.65;
+      color: #CBD5E1;
+      margin-bottom: 24px;
+    }
+    .step-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .step-list li {
+      font-size: 13.5px;
+      color: #E2E8F0;
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      line-height: 1.45;
+    }
+    .step-num {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: #D47538;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .quote-box {
+      margin-top: 28px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.07);
+      border-left: 3px solid #FDBA74;
+      border-radius: 10px;
+      font-size: 13px;
+      font-style: italic;
+      color: #E2E8F0;
+    }
+
+    /* Cột phải: Form đăng ký */
+    .reg-form-side { padding: 38px 36px; }
+    .reg-form-side h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 28px;
+      color: #0A3D4C;
+      margin-bottom: 6px;
+    }
+    .reg-sub { font-size: 14px; color: #64748B; margin-bottom: 22px; }
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 540px) {
+      .form-row-2 { grid-template-columns: 1fr; }
+    }
+    .form-group { margin-bottom: 14px; }
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #0A3D4C;
+      margin-bottom: 6px;
+    }
+    .input-wrap { position: relative; }
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1px solid #CBD5E1;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 14px;
+      background: #FAF7F2;
+      color: #1E293B;
+      outline: none;
+      transition: 0.2s;
+    }
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: #0A3D4C;
+      background: #FFFFFF;
+    }
+    .toggle-pass {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      font-size: 12px;
+      font-weight: 600;
+      color: #64748B;
+      cursor: pointer;
+    }
+    .terms-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      font-size: 13px;
+      color: #475569;
+      margin: 6px 0 18px;
+      line-height: 1.45;
+    }
+    .terms-row input { margin-top: 3px; cursor: pointer; }
+    .btn-register {
+      width: 100%;
+      padding: 13px;
+      background: #D47538;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .btn-register:hover { background: #B55D24; }
+    .reg-footer-links {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 13.5px;
+      color: #64748B;
+    }
+    .reg-footer-links a {
+      color: #0A3D4C;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .reg-footer-links a:hover { color: #D47538; text-decoration: underline; }
+    .status-box {
+      display: none;
+      margin-top: 15px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 13.5px;
+      line-height: 1.5;
+    }
+    .status-error {
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      color: #991B1B;
+    }
+    .status-success {
+      background: #ECFDF5;
+      border: 1px solid #A7F3D0;
+      color: #065F46;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Thanh điều hướng đồng bộ 6 trang -->
+  <nav class="py-topbar">
+    <div class="py-topbar-inner">
+      <div class="py-nav-group">
+        <a href="index.html" class="py-link" data-vi="🏠 Trang chủ" data-en="🏠 Home">🏠 Trang chủ</a>
+        <a href="gioithieu.html" class="py-link" data-vi="Giới thiệu" data-en="About">Giới thiệu</a>
+        <a href="sanpham.html" class="py-link" data-vi="Sản phẩm" data-en="Products">Sản phẩm</a>
+        <a href="lienlac.html" class="py-link" data-vi="Liên lạc" data-en="Contact">Liên lạc</a>
+      </div>
+      <div class="py-nav-group">
+        <a href="dangnhap.html" class="py-link" data-vi="Đăng nhập" data-en="Login">Đăng nhập</a>
+        <a href="dangky.html" class="py-link active" data-vi="Đăng ký" data-en="Sign Up">Đăng ký</a>
+        <button type="button" class="py-lang-btn" onclick="toggleRegLang()">VI | EN</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Nội dung chính -->
+  <main class="reg-wrapper">
+    <div class="reg-card">
+      <!-- Cột trái -->
+      <div class="reg-banner">
+        <div>
+          <span class="brand-pill" data-vi="Gia Nhập Cộng Đồng" data-en="Join the Community">Gia Nhập Cộng Đồng</span>
+          <h1 data-vi="Trở Thành Đại Sứ Ẩm Thực Phú Yên" data-en="Become a Phu Yen Culinary Ambassador">Trở Thành Đại Sứ Ẩm Thực Phú Yên</h1>
+          <p data-vi="Tạo tài khoản miễn phí trong 30 giây để lưu giữ sổ tay món ngon Xứ Nẫu và đồng hành cùng những chuyến khám phá vùng đất Hoa vàng trên cỏ xanh." data-en="Create a free account in 30 seconds to save your Xu Nau food passport and plan unforgettable trips across Phu Yen.">Tạo tài khoản miễn phí trong 30 giây để lưu giữ sổ tay món ngon Xứ Nẫu và đồng hành cùng những chuyến khám phá vùng đất Hoa vàng trên cỏ xanh.</p>
+
+          <ul class="step-list">
+            <li><span class="step-num">1</span><span data-vi="Cá nhân hóa lịch trình thưởng thức 5 đặc sản trứ danh" data-en="Personalize your tasting itinerary across 5 iconic dishes">Cá nhân hóa lịch trình thưởng thức 5 đặc sản trứ danh</span></li>
+            <li><span class="step-num">2</span><span data-vi="Nhận ưu đãi khi đặt đặc sản Phú Yên đóng gói làm quà" data-en="Unlock perks when ordering packaged Phu Yen specialties">Nhận ưu đãi khi đặt đặc sản Phú Yên đóng gói làm quà</span></li>
+            <li><span class="step-num">3</span><span data-vi="Đóng góp quán ngon bản địa cho du khách khắp thế giới" data-en="Share hidden local eateries with travelers worldwide">Đóng góp quán ngon bản địa cho du khách khắp thế giới</span></li>
+          </ul>
+        </div>
+
+        <div class="quote-box" data-vi="“Mỗi món ăn Phú Yên là một câu chuyện của biển cả, nắng gió và tấm lòng hiếu khách người Xứ Nẫu.”" data-en="“Every dish in Phu Yen tells a story of the ocean, sunshine, and the warm hospitality of Xu Nau.”">
+          “Mỗi món ăn Phú Yên là một câu chuyện của biển cả, nắng gió và tấm lòng hiếu khách người Xứ Nẫu.”
+        </div>
+      </div>
+
+      <!-- Cột phải -->
+      <div class="reg-form-side">
+        <h2 data-vi="Đăng Ký Tài Khoản Mới" data-en="Create Member Account">Đăng Ký Tài Khoản Mới</h2>
+        <p class="reg-sub" data-vi="Điền thông tin bên dưới để bắt đầu hành trình vị giác của bạn" data-en="Fill in your details below to start your culinary journey">Điền thông tin bên dưới để bắt đầu hành trình vị giác của bạn</p>
+
+        <form onsubmit="handleMemberRegister(event)">
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="reg-name" data-vi="Họ và tên *" data-en="Full Name *">Họ và tên *</label>
+              <input type="text" id="reg-name" data-ph-vi="Ví dụ: Nguyễn Đăng Khoa" data-ph-en="e.g., Alex Morgan" placeholder="Ví dụ: Nguyễn Đăng Khoa" required />
+            </div>
+
+            <div class="form-group">
+              <label for="reg-region" data-vi="Bạn đến từ đâu?" data-en="Where are you from?">Bạn đến từ đâu?</label>
+              <select id="reg-region">
+                <option value="Phú Yên" data-vi="Phú Yên (Bản địa)" data-en="Phu Yen (Local)">Phú Yên (Bản địa)</option>
+                <option value="TP. Hồ Chí Minh" data-vi="TP. Hồ Chí Minh" data-en="Ho Chi Minh City">TP. Hồ Chí Minh</option>
+                <option value="Hà Nội" data-vi="Hà Nội" data-en="Hanoi">Hà Nội</option>
+                <option value="Tỉnh thành khác" data-vi="Tỉnh thành khác tại Việt Nam" data-en="Other Province in Vietnam">Tỉnh thành khác tại Việt Nam</option>
+                <option value="Quốc tế" data-vi="Du khách Quốc tế" data-en="International Traveler">Du khách Quốc tế</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="reg-email" data-vi="Địa chỉ Email *" data-en="Email Address *">Địa chỉ Email *</label>
+            <input type="email" id="reg-email" placeholder="example@gmail.com" required />
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-group">
+              <label for="reg-pass" data-vi="Mật khẩu (tối thiểu 6 ký tự) *" data-en="Password (min. 6 chars) *">Mật khẩu (tối thiểu 6 ký tự) *</label>
+              <div class="input-wrap">
+                <input type="password" id="reg-pass" minlength="6" placeholder="••••••••" required />
+                <button type="button" class="toggle-pass" onclick="toggleRegPass('reg-pass', this)">Hiện</button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="reg-confirm" data-vi="Nhập lại mật khẩu *" data-en="Confirm Password *">Nhập lại mật khẩu *</label>
+              <div class="input-wrap">
+                <input type="password" id="reg-confirm" minlength="6" placeholder="••••••••" required />
+                <button type="button" class="toggle-pass" onclick="toggleRegPass('reg-confirm', this)">Hiện</button>
+              </div>
+            </div>
+          </div>
+
+          <label class="terms-row">
+            <input type="checkbox" required checked />
+            <span data-vi="Tôi đồng ý tham gia cộng đồng quảng bá văn hóa – ẩm thực Phú Yên văn minh và không quảng cáo rác." data-en="I agree to join the Phu Yen culinary community respectfully and help keep the platform clean.">Tôi đồng ý tham gia cộng đồng quảng bá văn hóa – ẩm thực Phú Yên văn minh và không quảng cáo rác.</span>
+          </label>
+
+          <button type="submit" class="btn-register" data-vi="Hoàn tất đăng ký" data-en="Create Account">Hoàn tất đăng ký</button>
+          <div id="reg-status" class="status-box"></div>
+        </form>
+
+        <div class="reg-footer-links">
+          <span data-vi="Đã có tài khoản rồi?" data-en="Already have an account?">Đã có tài khoản rồi?</span>
+          <a href="dangnhap.html" data-vi="Đăng nhập tại đây →" data-en="Sign in here →">Đăng nhập tại đây →</a>
+          <div style="margin-top:10px;">
+            <a href="index.html" style="color:#64748B;font-weight:500;" data-vi="← Quay về Trang chủ" data-en="← Back to Home">← Quay về Trang chủ</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    let regLang = 'vi';
+
+    function toggleRegLang() {
+      regLang = regLang === 'vi' ? 'en' : 'vi';
+      document.documentElement.lang = regLang;
+
+      document.querySelectorAll('[data-vi]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + regLang);
+      });
+      document.querySelectorAll('[data-ph-vi]').forEach(el => {
+        el.placeholder = el.getAttribute('data-ph-' + regLang);
+      });
+      document.querySelectorAll('.toggle-pass').forEach(btn => {
+        const inp = btn.previousElementSibling;
+        if (inp.type === 'password') {
+          btn.textContent = regLang === 'en' ? 'Show' : 'Hiện';
+        } else {
+          btn.textContent = regLang === 'en' ? 'Hide' : 'Ẩn';
+        }
+      });
+    }
+
+    function toggleRegPass(inputId, btn) {
+      const inp = document.getElementById(inputId);
+      if (inp.type === 'password') {
+        inp.type = 'text';
+        btn.textContent = regLang === 'en' ? 'Hide' : 'Ẩn';
+      } else {
+        inp.type = 'password';
+        btn.textContent = regLang === 'en' ? 'Show' : 'Hiện';
+      }
+    }
+
+    function handleMemberRegister(e) {
+      e.preventDefault();
+      const name = document.getElementById('reg-name').value.trim();
+      const email = document.getElementById('reg-email').value.trim();
+      const region = document.getElementById('reg-region').value;
+      const pass = document.getElementById('reg-pass').value;
+      const confirmPass = document.getElementById('reg-confirm').value;
+      const statusBox = document.getElementById('reg-status');
+
+      // Kiểm tra 2 ô mật khẩu có khớp nhau không
+      if (pass !== confirmPass) {
+        statusBox.style.display = 'block';
+        statusBox.className = 'status-box status-error';
+        statusBox.textContent = regLang === 'en'
+          ? '⚠️ Passwords do not match. Please re-enter and try again.'
+          : '⚠️ Mật khẩu nhập lại chưa khớp. Bạn kiểm tra lại giúp mình nhé!';
+        return;
+      }
+
+      // Lưu tài khoản & tự động đăng nhập vào trình duyệt
+      localStorage.setItem('py_logged_in_user', name);
+      localStorage.setItem('py_registered_user', JSON.stringify({ name, email, region }));
+
+      statusBox.style.display = 'block';
+      statusBox.className = 'status-box status-success';
+      statusBox.innerHTML = regLang === 'en'
+        ? '🎉 Account created! Welcome <strong>' + name + '</strong>. Redirecting to Home page...'
+        : '🎉 Đăng ký thành công! Chào mừng hội viên <strong>' + name + '</strong>, đang đưa bạn về Trang chủ...';
+
+      setTimeout(() => {
+        window.location.href = 'index.html';
+      }, 1400);
+    }
+  </script>
+</body>
+</html>

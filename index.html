@@ -2345,5 +2345,105 @@
   })();
 </script>
 <!-- === KẾT THÚC TÍNH NĂNG DANH SÁCH ĐÁNH GIÁ === -->
+<!-- === THANH ĐIỀU HƯỚNG HỆ THỐNG 6 TRANG === -->
+<style>
+  #py-multi-topbar {
+    background: #062833;
+    color: #E2E8F0;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px 16px;
+    position: relative;
+    z-index: 9998;
+  }
+  .py-topbar-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .py-nav-links, .py-auth-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+  .py-topbar-link {
+    color: #CBD5E1;
+    text-decoration: none;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-weight: 500;
+    transition: 0.2s;
+  }
+  .py-topbar-link:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #FFFFFF;
+  }
+  .py-topbar-link.active {
+    background: #D47538;
+    color: #FFFFFF;
+    font-weight: 600;
+  }
+  .py-topbar-signup {
+    border: 1px solid #FDBA74;
+    color: #FDBA74;
+  }
+  .py-topbar-signup:hover {
+    background: #D47538;
+    border-color: #D47538;
+    color: #FFFFFF;
+  }
+</style>
+
+<script>
+  (function() {
+    if (document.getElementById('py-multi-topbar')) return;
+
+    const bar = document.createElement('div');
+    bar.id = 'py-multi-topbar';
+    bar.innerHTML =
+      '<div class="py-topbar-inner">' +
+        '<div class="py-nav-links">' +
+          '<a href="index.html" class="py-topbar-link active" data-vi="🏠 Trang chủ" data-en="🏠 Home">🏠 Trang chủ</a>' +
+          '<a href="gioithieu.html" class="py-topbar-link" data-vi="Giới thiệu" data-en="About">Giới thiệu</a>' +
+          '<a href="sanpham.html" class="py-topbar-link" data-vi="Sản phẩm" data-en="Products">Sản phẩm</a>' +
+          '<a href="lienlac.html" class="py-topbar-link" data-vi="Liên lạc" data-en="Contact">Liên lạc</a>' +
+        '</div>' +
+        '<div class="py-auth-links" id="py-topbar-auth">' +
+          '<a href="dangnhap.html" class="py-topbar-link" data-vi="Đăng nhập" data-en="Login">Đăng nhập</a>' +
+          '<a href="dangky.html" class="py-topbar-link py-topbar-signup" data-vi="Đăng ký" data-en="Sign Up">Đăng ký</a>' +
+        '</div>' +
+      '</div>';
+
+    document.body.insertBefore(bar, document.body.firstChild);
+
+    // Hiển thị tên nếu người dùng đã đăng nhập thử ở trang dangnhap.html
+    const savedUser = localStorage.getItem('py_logged_in_user');
+    if (savedUser) {
+      const authBox = document.getElementById('py-topbar-auth');
+      authBox.innerHTML =
+        '<span style="color:#FDBA74;font-weight:600;padding:4px 8px;">👋 ' + savedUser + '</span>' +
+        '<a href="dangnhap.html" class="py-topbar-link" data-vi="Tài khoản" data-en="Account">Tài khoản</a>';
+    }
+
+    // Đồng bộ dịch VI / EN cho thanh điều hướng
+    const syncTopbarLang = function() {
+      const isEn = document.documentElement.lang === 'en' || (document.body.innerText || '').includes('5 SIGNATURE DISHES');
+      const lang = isEn ? 'en' : 'vi';
+      bar.querySelectorAll('[data-vi]').forEach(el => {
+        el.textContent = el.getAttribute('data-' + lang);
+      });
+    };
+
+    document.addEventListener('click', () => setTimeout(syncTopbarLang, 80));
+    setTimeout(syncTopbarLang, 250);
+  })();
+</script>
+<!-- === KẾT THÚC THANH ĐIỀU HƯỚNG === -->
 </body>
 </html>
