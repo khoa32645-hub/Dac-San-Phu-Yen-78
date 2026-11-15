@@ -2345,17 +2345,21 @@
   })();
 </script>
 <!-- === KẾT THÚC TÍNH NĂNG DANH SÁCH ĐÁNH GIÁ === -->
-<!-- === THANH ĐIỀU HƯỚNG HỆ THỐNG 6 TRANG === -->
+<!-- === THANH ĐIỀU HƯỚNG HỆ THỐNG 6 TRANG (ĐÃ FIX VỊ TRÍ & LINK) === -->
 <style>
   #py-multi-topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     background: #062833;
     color: #E2E8F0;
     font-family: 'Be Vietnam Pro', sans-serif;
     font-size: 13px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     padding: 8px 16px;
-    position: relative;
-    z-index: 9998;
+    z-index: 9999;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
   }
   .py-topbar-inner {
     max-width: 1200px;
@@ -2379,6 +2383,7 @@
     border-radius: 999px;
     font-weight: 500;
     transition: 0.2s;
+    cursor: pointer;
   }
   .py-topbar-link:hover {
     background: rgba(255, 255, 255, 0.12);
@@ -2398,7 +2403,25 @@
     border-color: #D47538;
     color: #FFFFFF;
   }
+  #py-nav-notice {
+    display: none;
+    position: fixed;
+    top: 52px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0A3D4C;
+    color: #FFFFFF;
+    border: 1px solid #FDBA74;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-size: 13px;
+    z-index: 10000;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  }
 </style>
+
+<div id="py-nav-notice"></div>
 
 <script>
   (function() {
@@ -2409,10 +2432,10 @@
     bar.innerHTML =
       '<div class="py-topbar-inner">' +
         '<div class="py-nav-links">' +
-          '<a href="index.html" class="py-topbar-link active" data-vi="🏠 Trang chủ" data-en="🏠 Home">🏠 Trang chủ</a>' +
-          '<a href="gioithieu.html" class="py-topbar-link" data-vi="Giới thiệu" data-en="About">Giới thiệu</a>' +
-          '<a href="sanpham.html" class="py-topbar-link" data-vi="Sản phẩm" data-en="Products">Sản phẩm</a>' +
-          '<a href="lienlac.html" class="py-topbar-link" data-vi="Liên lạc" data-en="Contact">Liên lạc</a>' +
+          '<a href="#top" id="py-home-link" class="py-topbar-link active" data-vi="🏠 Trang chủ" data-en="🏠 Home">🏠 Trang chủ</a>' +
+          '<a href="gioithieu.html" class="py-topbar-link py-upcoming-link" data-page="Giới thiệu" data-vi="Giới thiệu" data-en="About">Giới thiệu</a>' +
+          '<a href="sanpham.html" class="py-topbar-link py-upcoming-link" data-page="Sản phẩm" data-vi="Sản phẩm" data-en="Products">Sản phẩm</a>' +
+          '<a href="lienlac.html" class="py-topbar-link py-upcoming-link" data-page="Liên lạc" data-vi="Liên lạc" data-en="Contact">Liên lạc</a>' +
         '</div>' +
         '<div class="py-auth-links" id="py-topbar-auth">' +
           '<a href="dangnhap.html" class="py-topbar-link" data-vi="Đăng nhập" data-en="Login">Đăng nhập</a>' +
@@ -2422,7 +2445,47 @@
 
     document.body.insertBefore(bar, document.body.firstChild);
 
-    // Hiển thị tên nếu người dùng đã đăng nhập thử ở trang dangnhap.html
+    // Tự động đẩy header gốc và nội dung trang xuống dưới để không bị che nhãn hiệu
+    function adjustHeaderOffset() {
+      const h = bar.offsetHeight || 44;
+      document.body.style.paddingTop = h + 'px';
+      const mainHeader = document.querySelector('header');
+      if (mainHeader) {
+        mainHeader.style.top = h + 'px';
+      }
+      const notice = document.getElementById('py-nav-notice');
+      if (notice) {
+        notice.style.top = (h + 10) + 'px';
+      }
+    }
+    adjustHeaderOffset();
+    window.addEventListener('resize', adjustHeaderOffset);
+    setTimeout(adjustHeaderOffset, 150);
+
+    // Bấm Trang chủ khi đang ở Trang chủ -> cuộn mượt lên đầu trang, không báo lỗi
+    document.getElementById('py-home-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Hiển thị thông báo lịch sự cho các trang chưa dựng file (xóa khối này sau khi tạo đủ 3 trang)
+    let noticeTimer = null;
+    bar.querySelectorAll('.py-upcoming-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const isEn = document.documentElement.lang === 'en' || (document.body.innerText || '').includes('5 SIGNATURE DISHES');
+        const name = this.textContent.trim();
+        const notice = document.getElementById('py-nav-notice');
+        notice.textContent = isEn
+          ? '🚧 "' + name + '" page is coming up next!'
+          : '🚧 Trang "' + name + '" đang được chuẩn bị dựng tiếp theo!';
+        notice.style.display = 'block';
+        clearTimeout(noticeTimer);
+        noticeTimer = setTimeout(() => { notice.style.display = 'none'; }, 2800);
+      });
+    });
+
+    // Hiển thị tên hội viên nếu đã đăng nhập / đăng ký
     const savedUser = localStorage.getItem('py_logged_in_user');
     if (savedUser) {
       const authBox = document.getElementById('py-topbar-auth');
@@ -2431,7 +2494,7 @@
         '<a href="dangnhap.html" class="py-topbar-link" data-vi="Tài khoản" data-en="Account">Tài khoản</a>';
     }
 
-    // Đồng bộ dịch VI / EN cho thanh điều hướng
+    // Đồng bộ ngôn ngữ VI / EN
     const syncTopbarLang = function() {
       const isEn = document.documentElement.lang === 'en' || (document.body.innerText || '').includes('5 SIGNATURE DISHES');
       const lang = isEn ? 'en' : 'vi';
